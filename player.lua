@@ -31,7 +31,7 @@ function Player:init(args)
 
   elseif self.character == 'wizard' then
     self.attack_sensor = Circle(self.x, self.y, 128)
-    self.t:cooldown(2, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+    self.t:cooldown(1.6, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local closest_enemy = self:get_closest_object_in_shape(self.attack_sensor, main.current.enemies)
       if closest_enemy then
         self:shoot(self:angle_to_object(closest_enemy), {chain = (self.level == 3 and 2 or 0)})
@@ -119,8 +119,8 @@ function Player:init(args)
     end, nil, nil, 'shoot')
 
   elseif self.character == 'scout' then
-    self.attack_sensor = Circle(self.x, self.y, 64)
-    self.t:cooldown(2, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+    self.attack_sensor = Circle(self.x, self.y, 60)
+    self.t:cooldown(2.5, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local closest_enemy = self:get_closest_object_in_shape(self.attack_sensor, main.current.enemies)
       if closest_enemy then
         self:shoot(self:angle_to_object(closest_enemy), {chain = (self.level == 3 and 6 or 3)})
@@ -128,8 +128,8 @@ function Player:init(args)
     end, nil, nil, 'shoot')
 
   elseif self.character == 'thief' then
-    self.attack_sensor = Circle(self.x, self.y, 64)
-    self.t:cooldown(2, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+    self.attack_sensor = Circle(self.x, self.y, 60)
+    self.t:cooldown(2.5, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local closest_enemy = self:get_closest_object_in_shape(self.attack_sensor, main.current.enemies)
       if closest_enemy then
         self:shoot(self:angle_to_object(closest_enemy), {chain = (self.level == 3 and 10 or 5)})
@@ -208,7 +208,7 @@ function Player:init(args)
   elseif self.character == 'artificer' then
     self.sorcerer_count = 0
     self.attack_sensor = Circle(self.x, self.y, 96)
-    self.t:every(6, function()
+    self.t:every(5, function()
       SpawnEffect{group = main.current.effects, x = self.x, y = self.y, color = self.color, action = function(x, y)
         artificer1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
         local check_circle = Circle(self.x, self.y, 2)
@@ -233,7 +233,7 @@ function Player:init(args)
     end)
 
   elseif self.character == 'outlaw' then
-    self.attack_sensor = Circle(self.x, self.y, 96)
+    self.attack_sensor = Circle(self.x, self.y, 75)
     self.t:cooldown(3, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local closest_enemy = self:get_closest_object_in_shape(self.attack_sensor, main.current.enemies)
       if closest_enemy then
@@ -242,7 +242,7 @@ function Player:init(args)
     end, nil, nil, 'shoot')
 
   elseif self.character == 'blade' then
-    self.attack_sensor = Circle(self.x, self.y, 64)
+    self.attack_sensor = Circle(self.x, self.y, 80)
     self.t:cooldown(4, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       self:shoot()
     end, nil, nil, 'shoot')
@@ -259,20 +259,20 @@ function Player:init(args)
   elseif self.character == 'psychic' then
     self.sorcerer_count = 0
     self.attack_sensor = Circle(self.x, self.y, self.level == 3 and 512 or 64)
-    self.t:cooldown(3, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+    self.t:cooldown(2.5, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local strike = function()
         local enemy = self:get_random_object_in_shape(self.attack_sensor, main.current.enemies)
         if enemy then
           if self.level == 3 then
-            self:attack(32, {x = enemy.x, y = enemy.y})
+            self:attack(48, {x = enemy.x, y = enemy.y})
             self.t:after(0.5, function()
               local enemy = self:get_random_object_in_shape(self.attack_sensor, main.current.enemies)
               if enemy then
-                self:attack(32, {x = enemy.x, y = enemy.y})
+                self:attack(48, {x = enemy.x, y = enemy.y})
               end
             end)
           else
-            self:attack(32, {x = enemy.x, y = enemy.y})
+            self:attack(48, {x = enemy.x, y = enemy.y})
           end
         end
       end
@@ -335,7 +335,7 @@ function Player:init(args)
   elseif self.character == 'vulcanist' then
     self.sorcerer_count = 0
     self.attack_sensor = Circle(self.x, self.y, 128)
-    self.t:every(12, function()
+    self.t:every(8, function()
       local volcano = function()
         local enemies = main.current.main:get_objects_by_classes(main.current.enemies)
         local x, y = 0, 0
@@ -398,7 +398,7 @@ function Player:init(args)
     end
 
   elseif self.character == 'spellblade' then
-    self.t:every(2, function()
+    self.t:every(1, function()
       self:shoot(random:float(0, 2*math.pi))
     end, nil, nil, 'shoot')
 
@@ -407,7 +407,7 @@ function Player:init(args)
     self.last_heal_time = love.timer.getTime()
 
   elseif self.character == 'engineer' then
-    self.t:every(8, function()
+    self.t:every(6, function()
       SpawnEffect{group = main.current.effects, x = self.x, y = self.y, color = orange[0], action = function(x, y)
         Turret{group = main.current.main, x = x, y = y, parent = self}
       end}
@@ -432,7 +432,7 @@ function Player:init(args)
 
   elseif self.character == 'plague_doctor' then
     self.t:every(5, function()
-      self:dot_attack(24, {duration = 12, plague_doctor_unmovable = true})
+      self:dot_attack(24, {duration = 30, plague_doctor_unmovable = true})
     end, nil, nil, 'attack')
 
     if self.level == 3 then
@@ -458,9 +458,9 @@ function Player:init(args)
     end, nil, nil, 'attack')
 
   elseif self.character == 'barbarian' then
-    self.attack_sensor = Circle(self.x, self.y, 48)
-    self.t:cooldown(8, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
-      self:attack(96, {stun = 4})
+    self.attack_sensor = Circle(self.x, self.y, 50)
+    self.t:cooldown(6, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+      self:attack(100, {stun = 3})
     end, nil, nil, 'attack')
 
   elseif self.character == 'juggernaut' then
@@ -485,12 +485,12 @@ function Player:init(args)
 
   elseif self.character == 'pyromancer' then
     self.t:after(0.01, function()
-      self.dot_area = DotArea{group = main.current.effects, x = self.x, y = self.y, rs = self.area_size_m*48, color = self.color, dmg = self.area_dmg_m*self.dmg, character = self.character, level = self.level, parent = self}
+      self.dot_area = DotArea{group = main.current.effects, x = self.x, y = self.y, rs = self.area_size_m*42+(6*self.level), color = self.color, dmg = self.area_dmg_m*self.dmg, character = self.character, level = self.level, parent = self}
     end)
 
   elseif self.character == 'corruptor' then
     self.attack_sensor = Circle(self.x, self.y, 160)
-    self.t:cooldown(2, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+    self.t:cooldown(1, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local closest_enemy = self:get_closest_object_in_shape(self.attack_sensor, main.current.enemies)
       if closest_enemy then
         self:shoot(self:angle_to_object(closest_enemy), {spawn_critters_on_kill = 3, spawn_critters_on_hit = (self.level == 3 and 2 or nil)})
@@ -523,7 +523,7 @@ function Player:init(args)
     end, nil, nil, 'attack')
 
   elseif self.character == 'jester' then
-    self.attack_sensor = Circle(self.x, self.y, 96)
+    self.attack_sensor = Circle(self.x, self.y, 64)
     self.wide_attack_sensor = Circle(self.x, self.y, 128)
     self.t:cooldown(6, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       buff1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
@@ -561,11 +561,11 @@ function Player:init(args)
       local curse = function()
         buff1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
         local enemies = table.first2(table.shuffle(self:get_objects_in_shape(self.wide_attack_sensor, main.current.enemies)),
-          6 + ((self.malediction == 1 and 1) or (self.malediction == 2 and 3) or (self.malediction == 3 and 5) or 0) + ((main.current.curser_level == 2 and 3) or (main.current.curser_level == 1 and 1) or 0))
+          6 + ((self.malediction == 1 and 1) or (self.malediction == 2 and 3) or (self.malediction == 3 and 5) or 0) + ((main.current.curser_level == 2 and 3) or (main.current.curser_level == 1 and 1) or 0) + ((self.level == 3 and 3) or 0))
         for _, enemy in ipairs(enemies) do
           enemy:curse('silencer', 6*(self.hex_duration_m or 1), self.level == 3, self)
           if self.level == 3 then
-            enemy:apply_dot(self.dmg*(self.dot_dmg_m or 1)*(main.current.chronomancer_dot or 1), 6*(self.hex_duration_m or 1))
+            enemy:attack(3, {stun = 4})
           end
           HitCircle{group = main.current.effects, x = self.x, y = self.y, rs = 6, color = blue2[0], duration = 0.1}
           LightningLine{group = main.current.effects, src = self, dst = enemy, color = blue2[0]}
@@ -585,8 +585,8 @@ function Player:init(args)
     end, nil, nil, 'attack')
 
   elseif self.character == 'assassin' then
-    self.attack_sensor = Circle(self.x, self.y, 64)
-    self.t:cooldown(2, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+    self.attack_sensor = Circle(self.x, self.y, 60)
+    self.t:cooldown(1.8, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local closest_enemy = self:get_closest_object_in_shape(self.attack_sensor, main.current.enemies)
       if closest_enemy then
         self:shoot(self:angle_to_object(closest_enemy), {pierce = 1000})
@@ -595,31 +595,31 @@ function Player:init(args)
 
   elseif self.character == 'host' then
     if self.level == 3 then
-      self.t:every(1, function()
+      self.t:every(0.8, function()
         critter1:play{pitch = random:float(0.95, 1.05), volume = 0.35}
         for i = 1, 2 do
           Critter{group = main.current.main, x = self.x, y = self.y, color = orange[0], r = random:float(0, 2*math.pi), v = 10, dmg = self.dmg, parent = self}
         end
       end, nil, nil, 'spawn')
     else
-      self.t:every(2, function()
+      self.t:every(1.6, function()
         critter1:play{pitch = random:float(0.95, 1.05), volume = 0.35}
         Critter{group = main.current.main, x = self.x, y = self.y, color = orange[0], r = random:float(0, 2*math.pi), v = 10, dmg = self.dmg, parent = self}
       end, nil, nil, 'spawn')
     end
 
   elseif self.character == 'carver' then
-    self.t:every(16, function()
+    self.t:every(8, function()
       Tree{group = main.current.main, x = self.x, y = self.y, color = self.color, parent = self, level = self.level}
     end, nil, nil, 'spawn')
 
   elseif self.character == 'sentry' then
-    self.t:every(7, function()
+    self.t:every(5, function()
       Sentry{group = main.current.main, x = self.x, y = self.y, color = self.color, parent = self, level = self.level}
     end, nil, nil, 'spawn')
 
   elseif self.character == 'bane' then
-    self.attack_sensor = Circle(self.x, self.y, 96)
+    self.attack_sensor = Circle(self.x, self.y, 64)
     self.wide_attack_sensor = Circle(self.x, self.y, 128)
     self.t:cooldown(6, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       buff1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
@@ -643,7 +643,7 @@ function Player:init(args)
   elseif self.character == 'barrager' then
     self.barrager_counter = 0
     self.attack_sensor = Circle(self.x, self.y, 128)
-    self.t:cooldown(4, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+    self.t:cooldown(2, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local closest_enemy = self:get_closest_object_in_shape(self.attack_sensor, main.current.enemies)
       local r = self:angle_to_object(closest_enemy)
       self.barrager_counter = self.barrager_counter + 1
@@ -651,13 +651,13 @@ function Player:init(args)
         self.barrager_counter = 0
         for i = 1, 15 do
           self.t:after((i-1)*0.05, function()
-            self:shoot(r + random:float(-math.pi/32, math.pi/32), {knockback = (self.level == 3 and 14 or 7)})
+            self:shoot(r + random:float(-math.pi/32, math.pi/32), {knockback = (self.level == 3 and 18 or 9)})
           end)
         end
       else
         for i = 1, 3 do
           self.t:after((i-1)*0.075, function()
-            self:shoot(r + random:float(-math.pi/32, math.pi/32), {knockback = (self.level == 3 and 14 or 7)})
+            self:shoot(r + random:float(-math.pi/32, math.pi/32), {knockback = (self.level == 3 and 18 or 9)})
           end)
         end
       end
@@ -669,7 +669,7 @@ function Player:init(args)
       if self.level == 3 then
         self.t:every(0.25, function()
           self:attack(72)
-        end, 3)
+        end, 5)
       else
         self:attack(72)
       end
@@ -736,7 +736,7 @@ function Player:init(args)
 
   elseif self.character == 'warden' then
     self.sorcerer_count = 0
-    self.t:every(12, function()
+    self.t:every(10, function()
       local ward = function()
         if self.level == 3 then
           local units = self:get_all_units()
@@ -800,9 +800,11 @@ function Player:init(args)
         local unit_1 = random:table_remove(all_units)
         local unit_2 = random:table_remove(all_units)
         local unit_3 = random:table_remove(all_units)
+        local unit_4 = random:table_remove(all_units)
         if unit_1 then unit_1.divined = true end
         if unit_2 then unit_2.divined = true end
         if unit_3 then unit_3.divined = true end
+        if unit_4 then unit_4.divined = true end
       end)
     end
 
@@ -823,12 +825,12 @@ function Player:init(args)
     end, nil, nil, 'heal')
 
   elseif self.character == 'infestor' then
-    self.attack_sensor = Circle(self.x, self.y, 96)
+    self.attack_sensor = Circle(self.x, self.y, 64)
     self.wide_attack_sensor = Circle(self.x, self.y, 128)
     self.t:cooldown(6, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       buff1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
       local enemies = table.first2(table.shuffle(self:get_objects_in_shape(self.wide_attack_sensor, main.current.enemies)),
-        8 + ((self.malediction == 1 and 1) or (self.malediction == 2 and 3) or (self.malediction == 3 and 5) or 0) + ((main.current.curser_level == 2 and 3) or (main.current.curser_level == 1 and 1) or 0))
+        8 + ((self.malediction == 1 and 1) or (self.malediction == 2 and 3) or (self.malediction == 3 and 5) or 0) + ((main.current.curser_level == 2 and 3) or (main.current.curser_level == 1 and 1) or 0) + (self.level == 3 and 2) or 0)
       for _, enemy in ipairs(enemies) do
         enemy:curse('infestor', 6*(self.hex_duration_m or 1), (self.level == 3 and 6 or 2), self.dmg, self)
         HitCircle{group = main.current.effects, x = self.x, y = self.y, rs = 6, color = orange[0], duration = 0.1}
@@ -871,7 +873,7 @@ function Player:init(args)
 
   if self.ouroboros_technique_r then
     self.t:after(0.01, function()
-      self.t:every((self.ouroboros_technique_r == 1 and 0.5) or (self.ouroboros_technique_r == 2 and 0.33) or (self.ouroboros_technique_r == 3 and 0.25), function()
+      self.t:every((self.ouroboros_technique_r == 1 and 0.2) or (self.ouroboros_technique_r == 2 and 0.166) or (self.ouroboros_technique_r == 3 and 0.144), function()
         if self.leader and (state.mouse_control and table.all(self.mouse_control_v_buffer, function(v) return v >= 0.5 end)) or (self.move_right_pressed and love.timer.getTime() - self.move_right_pressed > 1) then
           local target = self:get_closest_object_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
           if target then
@@ -895,16 +897,16 @@ function Player:init(args)
     end)
   end
 
-  if self.centipede then self.centipede_mvspd_m = (self.centipede == 1 and 1.1) or (self.centipede == 2 and 1.2) or (self.centipede == 3 and 1.3) end
-  if self.amplify then self.amplify_area_dmg_m = (self.amplify == 1 and 1.2) or (self.amplify == 2 and 1.35) or (self.amplify == 3 and 1.5) end
+  if self.centipede then self.centipede_mvspd_m = (self.centipede == 1 and 1.15) or (self.centipede == 2 and 1.25) or (self.centipede == 3 and 1.35) end
+  if self.amplify then self.amplify_area_dmg_m = (self.amplify == 1 and 1.2) or (self.amplify == 2 and 1.4) or (self.amplify == 3 and 1.6) end
 
   if self.ballista and launches_projectiles(self.character) then
-    self.ballista_dmg_m = (self.ballista == 1 and 1.2) or (self.ballista == 2 and 1.35) or (self.ballista == 3 and 1.5)
+    self.ballista_dmg_m = (self.ballista == 1 and 1.25) or (self.ballista == 2 and 1.4) or (self.ballista == 3 and 1.55)
   end
 
   if self.chronomancy then
     if table.any(self.classes, function(v) return v == 'mage' end) then
-      self.chronomancy_aspd_m = (self.chronomancy == 1 and 1.15) or (self.chronomancy == 2 and 1.25) or (self.chronomancy == 3 and 1.35)
+      self.chronomancy_aspd_m = (self.chronomancy == 1 and 1.25) or (self.chronomancy == 2 and 1.35) or (self.chronomancy == 3 and 1.45)
     end
   end
 
@@ -941,7 +943,7 @@ function Player:init(args)
         camera:shake(4, 0.5)
       end
       for _, enemy in ipairs(enemies) do
-        enemy:hit(10*#mages)
+        enemy:hit(enemy.max_hp*6*#mages)
         LightningLine{group = main.current.effects, src = {x = enemy.x, y = enemy.y - 32}, dst = enemy, color = blue[0], duration = 0.2}
         _G[random:table{'spark1', 'spark2', 'spark3'}]:play{pitch = random:float(0.9, 1.1), volume = 0.3}
       end
@@ -982,7 +984,7 @@ function Player:init(args)
         end
       end
       if any_enchanter then
-        local v = (self.reinforce == 1 and 1.1) or (self.reinforce == 2 and 1.2) or (self.reinforce == 3 and 1.3) or 1
+        local v = (self.reinforce == 1 and 1.08) or (self.reinforce == 2 and 1.16) or (self.reinforce == 3 and 1.24) or 1
         self.reinforce_dmg_m = v
         self.reinforce_def_m = v
         self.reinforce_aspd_m = v
@@ -1038,11 +1040,11 @@ function Player:init(args)
 
   if self.leader and self.shoot_5 then
     main.current.t:after(0.1, function()
-      main.current.t:every(0.33, function()
+      main.current.t:every(0.2, function()
         local units = main.current.player:get_all_units()
         local unit = units[5]
         if unit then
-          local target = unit:get_closest_object_in_shape(Circle(unit.x, unit.y, 96), main.current.enemies)
+          local target = unit:get_closest_object_in_shape(Circle(unit.x, unit.y, 128), main.current.enemies)
           if target then
             unit:barrage(unit:angle_to_object(target), 1, nil, nil, true)
           else
@@ -1093,7 +1095,7 @@ function Player:init(args)
       end
 
       if self.psyker_orbs then
-        for i = 1, ((self.psyker_orbs == 1 and 1) or (self.psyker_orbs == 2 and 2) or (self.psyker_orbs == 3 and 4) or 0) do
+        for i = 1, ((self.psyker_orbs == 1 and 1) or (self.psyker_orbs == 2 and 3) or (self.psyker_orbs == 3 and 5) or 0) do
           local unit = random:table(#psykers > 0 and psykers or units)
           Projectile{group = main.current.main, x = unit.x + 24*math.cos(unit.r), y = unit.y + 24*math.sin(unit.r), color = fg[0], v = 200, dmg = unit.dmg, character = 'psyker', parent = unit}
         end
@@ -1102,7 +1104,7 @@ function Player:init(args)
   end
 
   if self.leader and self.psycholeak then
-    main.current.t:every(10, function()
+    main.current.t:every(8, function()
       local unit = main.current.player
       Projectile{group = main.current.main, x = unit.x + 24*math.cos(unit.r), y = unit.y + 24*math.sin(unit.r), color = fg[0], v = 200, dmg = unit.dmg, character = 'psyker', parent = unit}
     end)
@@ -1137,8 +1139,8 @@ function Player:update(dt)
       unit.squire_dmg_m = 1.2
       unit.squire_def_m = 1.2
       if self.level == 3 then
-        unit.squire_dmg_m = 1.5
-        unit.squire_def_m = 1.5
+        unit.squire_dmg_m = 1.3
+        unit.squire_def_m = 1.3
         unit.squire_aspd_m = 1.3
         unit.squire_mvspd_m = 1.3
       end
@@ -1169,12 +1171,12 @@ function Player:update(dt)
     if class_levels.sorcerer >= 1 then number_of_active_sets = number_of_active_sets + 1 end
     if class_levels.mercenary >= 1 then number_of_active_sets = number_of_active_sets + 1 end
     if class_levels.explorer >= 1 then number_of_active_sets = number_of_active_sets + 1 end
-    self.vagrant_dmg_m = 1 + 0.1*number_of_active_sets
-    self.vagrant_aspd_m = 1 + 0.1*number_of_active_sets
+    self.vagrant_dmg_m = 1 + 0.15*number_of_active_sets
+    self.vagrant_aspd_m = 1 + 0.15*number_of_active_sets
   end
 
   if self.character == 'swordsman' and self.level == 3 then
-    self.swordsman_dmg_m = 2
+    self.swordsman_dmg_m = 3
   end
 
   if self.character == 'outlaw' and self.level == 3 then
@@ -1194,7 +1196,7 @@ function Player:update(dt)
   end
 
   self.heal_effect_m = 1
-  if self.blessing then self.heal_effect_m = self.heal_effect_m*((self.blessing == 1 and 1.1) or (self.blessing == 2 and 1.2) or (self.blessing == 3 and 1.3)) end
+  if self.blessing then self.heal_effect_m = self.heal_effect_m*((self.blessing == 1 and 1.15) or (self.blessing == 2 and 1.25) or (self.blessing == 3 and 1.35)) end
 
   if table.any(self.classes, function(v) return v == 'nuker' end) then
     if main.current.nuker_level == 2 then self.nuker_area_size_m = 1.25; self.nuker_area_dmg_m = 1.25
@@ -1246,17 +1248,17 @@ function Player:update(dt)
 
   self.dot_dmg_m = 1
   if table.any(self.classes, function(v) return v == 'voider' end) then
-    if main.current.voider_level == 2 then self.dot_dmg_m = 1.4
-    elseif main.current.voider_level == 1 then self.dot_dmg_m = 1.2
+    if main.current.voider_level == 2 then self.dot_dmg_m = 1.5
+    elseif main.current.voider_level == 1 then self.dot_dmg_m = 1.25
     else self.dot_dmg_m = 1 end
   end
-  if self.call_of_the_void then self.dot_dmg_m = (self.dot_dmg_m or 1)*((self.call_of_the_void == 1 and 1.3) or (self.call_of_the_void == 2 and 1.6) or (self.call_of_the_void == 3 and 1.9) or 1) end
+  if self.call_of_the_void then self.dot_dmg_m = (self.dot_dmg_m or 1)*((self.call_of_the_void == 1 and 1.5) or (self.call_of_the_void == 2 and 2) or (self.call_of_the_void == 3 and 2.5) or 1) end
 
   if self.ouroboros_technique_l and self.leader then
     local units = self:get_all_units()
     if (state.mouse_control and table.all(self.mouse_control_v_buffer, function(v) return v <= -0.5 end)) or (self.move_left_pressed and love.timer.getTime() - self.move_left_pressed > 1) then
       for _, unit in ipairs(units) do
-        unit.ouroboros_def_m = (self.ouroboros_technique_l == 1 and 1.15) or (self.ouroboros_technique_l == 2 and 1.25) or (self.ouroboros_technique_l == 3 and 1.35)
+        unit.ouroboros_def_m = (self.ouroboros_technique_l == 1 and 1.50) or (self.ouroboros_technique_l == 2 and 1.75) or (self.ouroboros_technique_l == 3 and 2)
       end
     else
       for _, unit in ipairs(units) do
@@ -1266,48 +1268,51 @@ function Player:update(dt)
   end
 
   if self.berserking and table.any(self.classes, function(v) return v == 'warrior' end) then
-    self.berserking_aspd_m = math.remap(self.hp/self.max_hp, 0, 1, (self.berserking == 1 and 1.5) or (self.berserking == 2 and 1.75) or (self.berserking == 3 and 2), 1)
+    self.berserking_aspd_m = math.remap(self.hp/self.max_hp, 0, 1, (self.berserking == 1 and 2) or (self.berserking == 2 and 3) or (self.berserking == 3 and 4), 1)
   end
 
   if self.speed_3 and self.follower_index == 2 then
-    self.speed_3_aspd_m = 1.5
+    self.speed_3_aspd_m = 1.6
   end
 
   if self.damage_4 and self.follower_index == 3 then
-    self.damage_4_dmg_m = 1.3
+    self.damage_4_dmg_m = 1.6
   end
 
   if self.defensive_stance and self.leader then
-    self.defensive_stance_def_m = (self.defensive_stance == 1 and 1.1) or (self.defensive_stance == 2 and 1.2) or (self.defensive_stance == 3 and 1.3)
+    self.defensive_stance_def_m = (self.defensive_stance == 1 and 1.2) or (self.defensive_stance == 2 and 1.4) or (self.defensive_stance == 3 and 1.6)
   end
 
   if self.defensive_stance and not self.leader and self.follower_index == #self.parent.followers then
-    self.defensive_stance_def_m = (self.defensive_stance == 1 and 1.1) or (self.defensive_stance == 2 and 1.2) or (self.defensive_stance == 3 and 1.3)
+    self.defensive_stance_def_m = (self.defensive_stance == 1 and 1.2) or (self.defensive_stance == 2 and 1.4) or (self.defensive_stance == 3 and 1.6)
   end
 
   if self.offensive_stance and self.leader then
-    self.offensive_stance_dmg_m = (self.offensive_stance == 1 and 1.1) or (self.offensive_stance == 2 and 1.2) or (self.offensive_stance == 3 and 1.3)
+    self.offensive_stance_dmg_m = (self.offensive_stance == 1 and 1.2) or (self.offensive_stance == 2 and 1.4) or (self.offensive_stance == 3 and 1.6)
   end
 
   if self.offensive_stance and not self.leader and self.follower_index == #self.parent.followers then
-    self.offensive_stance_dmg_m = (self.offensive_stance == 1 and 1.1) or (self.offensive_stance == 2 and 1.2) or (self.offensive_stance == 3 and 1.3)
+    self.offensive_stance_dmg_m = (self.offensive_stance == 1 and 1.2) or (self.offensive_stance == 2 and 1.4) or (self.offensive_stance == 3 and 1.6)
   end
 
   if self.leader and #self.followers == 0 and self.last_stand then
-    self.last_stand_dmg_m = 1.2
-    self.last_stand_def_m = 1.2
-    self.last_stand_aspd_m = 1.2
-    self.last_stand_area_size_m = 1.2
-    self.last_stand_area_dmg_m = 1.2
-    self.last_stand_mvspd_m = 1.2
+    self.last_stand_dmg_m = 1.25
+    self.last_stand_def_m = 1.25
+    self.last_stand_aspd_m = 1.25
+    self.last_stand_area_size_m = 1.25
+    self.last_stand_area_dmg_m = 1.25
+    self.last_stand_mvspd_m = 1.25
   end
 
   if self.dividends and table.any(self.classes, function(v) return v == 'mercenary' end) then
     self.dividends_dmg_m = (1 + gold/100)
+    if self.dividends_dmg_m >= 1000 then
+      self.dividends_dmg_m = 1000
+    end
   end
 
   if self.character == 'flagellant' and self.level == 3 then
-    self.flagellant_hp_m = 2
+    self.flagellant_hp_m = 4
   end
 
   if self.haste then
@@ -1519,7 +1524,7 @@ function Player:hit(damage, from_undead)
     local units = self:get_all_units()
     for _, unit in ipairs(units) do
       if not unit.payback_dmg_m then unit.payback_dmg_m = 1 end
-      unit.payback_dmg_m = unit.payback_dmg_m + ((self.payback == 1 and 0.02) or (self.payback == 2 and 0.05) or (self.payback == 3 and 0.08) or 0)
+      unit.payback_dmg_m = unit.payback_dmg_m + ((self.payback == 1 and 0.05) or (self.payback == 2 and 0.1) or (self.payback == 3 and 0.15) or 0)
     end
   end
 
@@ -1550,7 +1555,7 @@ function Player:hit(damage, from_undead)
 
   if self.character == 'psykeeper' then
     self.stored_heal = self.stored_heal + actual_damage
-    if self.stored_heal > (0.25*self.max_hp) then
+    if self.stored_heal > (0.2*self.max_hp) then
       self.stored_heal = 0
       local check_circle = Circle(random:float(main.current.x1 + 16, main.current.x2 - 16), random:float(main.current.y1 + 16, main.current.y2 - 16), 2)
       local objects = main.current.main:get_objects_in_shape(check_circle, {Seeker, EnemyCritter, Critter, Volcano, Saboteur, Bomb, Pet, Turret, Sentry, Automaton})
@@ -1572,7 +1577,7 @@ function Player:hit(damage, from_undead)
     if self.level == 3 then
       local enemies = main.current.main:get_objects_by_classes(main.current.enemies)
       for _, enemy in ipairs(enemies) do
-        enemy:hit(2*actual_damage/#enemies)
+        enemy:hit(3*actual_damage/#enemies)
       end
     end
   end
@@ -1590,7 +1595,7 @@ function Player:hit(damage, from_undead)
 
     elseif self.lasting_7 and self.follower_index == 6 and not self.undead then
       self.undead = true
-      self.t:after(10, function() self:hit(10000, true) end)
+      self.t:after(20, function() self:hit(10000, true) end)
 
     else
       hit4:play{pitch = random:float(0.95, 1.05), volume = 0.5}
@@ -1618,18 +1623,18 @@ function Player:hit(damage, from_undead)
         elementor1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
         local enemies = self:get_objects_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
         for _, enemy in ipairs(enemies) do
-          enemy:push(random:float(30, 50)*(self.knockback_m or 1), self:angle_to_object(enemy))
+          enemy:push(random:float(120, 200)*(self.knockback_m or 1), self:angle_to_object(enemy))
         end
       end
 
       if self.porcupine_technique then
         main.current.t:after(0.01, function()
           local r = 0
-          for i = 1, 8 do
+          for i = 1, 16 do
             archer1:play{pitch = random:float(0.95, 1.05), volume = 0.35}
-            HitCircle{group = main.current.effects, x = self.x + 0.8*self.shape.w*math.cos(r), y = self.y + 0.8*self.shape.w*math.sin(r), rs = 6}
-            local t = {group = main.current.main, x = self.x + 1.6*self.shape.w*math.cos(r), y = self.y + 1.6*self.shape.w*math.sin(r), v = 250, r = r, color = self.color, dmg = self.dmg,
-            parent = self, character = 'barrage', level = self.level, pierce = 1000, ricochet = 2}
+            HitCircle{group = main.current.effects, x = self.x + 0.8*self.shape.w*math.cos(r), y = self.y + 0.8*self.shape.w*math.sin(r), rs = 60}
+            local t = {group = main.current.main, x = self.x + 1.6*self.shape.w*math.cos(r), y = self.y + 1.6*self.shape.w*math.sin(r), v = 250, r = r, color = self.color, dmg = self.dmg*5,
+            parent = self, character = 'barrage', level = self.level, pierce = 1000, ricochet = 5}
             Projectile(table.merge(t, mods or {}))
             r = r + math.pi/4
           end
@@ -1647,13 +1652,15 @@ function Player:hit(damage, from_undead)
       if self.annihilation and table.any(self.classes, function(v) return v == 'voider' end) then
         local enemies = self.group:get_objects_by_classes({Seeker, EnemyCritter})
         for _, enemy in ipairs(enemies) do
-          enemy:apply_dot(self.dmg*(self.dot_dmg_m or 1)*(main.current.chronomancer_dot or 1), 3)
+          enemy:apply_dot(self.dmg*(self.dot_dmg_m or 1)*(main.current.chronomancer_dot or 1), 10)
         end
       end
 
       if self.insurance then
-        if random:bool(4*((main.current.mercenary_level == 2 and 16) or (main.current.mercenary_level == 1 and 8) or 0)) then
+        if random:bool(6*((main.current.mercenary_level == 2 and 16) or (main.current.mercenary_level == 1 and 8) or 0)) then
           main.current.t:after(0.01, function()
+            Gold{group = main.current.main, x = self.x, y = self.y}
+            Gold{group = main.current.main, x = self.x, y = self.y}
             Gold{group = main.current.main, x = self.x, y = self.y}
             Gold{group = main.current.main, x = self.x, y = self.y}
           end)
@@ -1969,7 +1976,7 @@ function Projectile:init(args)
     elementor1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
     self.compression_dmg = self.dmg
     self.dmg = 0
-    self.pull_sensor = Circle(self.x, self.y, 64*self.parent.area_size_m)
+    self.pull_sensor = Circle(self.x, self.y, 96*self.parent.area_size_m)
     self.rs = 0
     self.t:tween(0.05, self, {rs = self.shape.w/2.5}, math.cubic_in_out, function() self.spring:pull(0.15) end)
     self.t:after(4, function()
@@ -1980,7 +1987,7 @@ function Projectile:init(args)
           magic_area1:play{pitch = random:float(0.95, 1.05), volume = 0.075}
           local enemies = self:get_objects_in_shape(self.pull_sensor, main.current.enemies)
           for _, enemy in ipairs(enemies) do
-            enemy:hit(3*self.compression_dmg)
+            enemy:hit(9*self.compression_dmg)
           end
         end
       end)
@@ -2042,12 +2049,12 @@ function Projectile:init(args)
     end)
 
   elseif self.character == 'witch' and self.level == 3 then
-    self.chain = 1
+    self.chain = 2
 
   elseif self.character == 'miner' then
     self.homing = true
     if self.level == 3 then
-      self.pierce = 2
+      self.pierce = 3
     end
   end
 
@@ -2070,13 +2077,13 @@ function Projectile:init(args)
   self.distance_dmg_m = 1
 
   if self.parent.blunt_arrow and table.any(self.parent.classes, function(v) return v == 'ranger' end) then
-    if random:bool((self.parent.blunt_arrow == 1 and 10) or (self.parent.blunt_arrow == 2 and 20) or (self.parent.blunt_arrow == 3 and 30)) then
-      self.knockback = 10
+    if random:bool((self.parent.blunt_arrow == 1 and 15) or (self.parent.blunt_arrow == 2 and 30) or (self.parent.blunt_arrow == 3 and 45)) then
+      self.knockback = 40
     end
   end
 
   if self.parent.flying_daggers and table.any(self.parent.classes, function(v) return v == 'rogue' end) then
-    self.chain = self.chain + ((self.parent.flying_daggers == 1 and 2) or (self.parent.flying_daggers == 2 and 3) or (self.parent.flying_daggers == 3 and 4))
+    self.chain = self.chain + ((self.parent.flying_daggers == 1 and 1) or (self.parent.flying_daggers == 2 and 2) or (self.parent.flying_daggers == 3 and 3))
   end
 end
 
@@ -2350,12 +2357,12 @@ function Projectile:on_trigger_enter(other, contact)
         end
       end
       local src = other
-      for i = 1, 2 + (stormweaver_level == 3 and 2 or 0) do
+      for i = 1, 4 + (stormweaver_level == 3 and 4 or 0) do
         _G[random:table{'spark1', 'spark2', 'spark3'}]:play{pitch = random:float(0.9, 1.1), volume = 0.3}
         table.insert(self.infused_enemies_hit, src)
         local dst = src:get_random_object_in_shape(Circle(src.x, src.y, (stormweaver_level == 3 and 128 or 64)), main.current.enemies, self.infused_enemies_hit)
         if dst then
-          dst:hit(0.2*self.dmg*(self.distance_dmg_m or 1))
+          dst:hit(0.4*self.dmg*(self.distance_dmg_m or 1))
           LightningLine{group = main.current.effects, src = src, dst = dst}
           src = dst 
         end
@@ -2427,7 +2434,7 @@ function Area:init(args)
     local resonance_m = (self.parent.resonance == 1 and 0.03) or (self.parent.resonance == 2 and 0.05) or (self.parent.resonance == 3 and 0.07) or 0
     if self.character == 'elementor' then
       if self.parent.resonance then resonance_dmg = 2*self.dmg*resonance_m*#enemies end
-      enemy:hit(2*self.dmg + resonance_dmg, self)
+      enemy:hit(3*self.dmg + resonance_dmg, self)
       if self.level == 3 then
         enemy:slow(0.4, 6)
       end
@@ -2445,6 +2452,8 @@ function Area:init(args)
       enemy:curse('launcher', 4*(self.hex_duration_m or 1), (self.level == 3 and 6*self.dmg or 2*self.dmg) + resonance_dmg, self.parent)
     elseif self.character == 'freezing_field' then
       enemy:slow(0.5, 2)
+    elseif self.parent:is(Critter) then
+     enemy:hit(self.dmg * enemy.max_hp)
     else
       if self.parent.resonance then resonance_dmg = self.dmg*resonance_m*#enemies end
       enemy:hit(self.dmg + resonance_dmg, self)
@@ -2558,7 +2567,7 @@ function DotArea:init(args)
   self.shape = Circle(self.x, self.y, self.rs)
   self.closest_sensor = Circle(self.x, self.y, 128)
 
-  if self.character == 'plague_doctor' or self.character == 'pyromancer' or self.character == 'witch' or self.character == 'burning_field' then
+  if self.character == 'plague_doctor' or self.character == 'pyromancer' or self.character == 'burning_field' then
     self.t:every(0.2, function()
       local enemies = main.current.main:get_objects_in_shape(self.shape, main.current.enemies)
       if #enemies > 0 then self.spring:pull(0.05, 200, 10) end
@@ -2577,16 +2586,34 @@ function DotArea:init(args)
       end
     end, nil, nil, 'dot')
 
+  elseif self.character == 'witch' then
+    self.t:every(0.2, function()
+      local enemies = main.current.main:get_objects_in_shape(self.shape, main.current.enemies)
+      if #enemies > 0 then self.spring:pull(0.05, 200, 10) end
+      for _, enemy in ipairs(enemies) do
+         hit2:play{pitch = random:float(0.8, 1.2), volume = 0.2}
+         enemy:hit((self.dot_dmg_m or 1)*self.dmg/5, self, true)
+         HitCircle{group = main.current.effects, x = enemy.x, y = enemy.y, rs = 6, color = fg[0], duration = 0.1}
+         for i = 1, 1 do HitParticle{group = main.current.effects, x = enemy.x, y = enemy.y, color = self.color} end
+         for i = 1, 1 do HitParticle{group = main.current.effects, x = enemy.x, y = enemy.y, color = enemy.color} end
+      end
+    end, nil, nil, 'dot')
+
   elseif self.character == 'cryomancer' then
     self.t:every(1, function()
       local enemies = main.current.main:get_objects_in_shape(self.shape, main.current.enemies)
       if #enemies > 0 then
         self.spring:pull(0.15, 200, 10)
-        frost1:play{pitch = random:float(0.8, 1.2), volume = 0.4}
+        frost1:play{pitch = random:float(0.8, 1.2), volume = 0.35}
       end
       for _, enemy in ipairs(enemies) do
         if self.level == 3 then
-          enemy:slow(0.4, 4)
+          enemy:slow(0.2, 4)
+          enemy:hit((self.dot_dmg_m or 1)*6*self.dmg, self, true)
+        elseif self.level == 2 then
+          enemy:slow(0.5, 4)
+        elseif self.level == 1 then
+          enemy:slow(0.8, 4)
         end
         enemy:hit((self.dot_dmg_m or 1)*2*self.dmg, self, true)
         HitCircle{group = main.current.effects, x = enemy.x, y = enemy.y, rs = 6, color = fg[0], duration = 0.1}
@@ -2624,7 +2651,7 @@ function DotArea:init(args)
       if #enemies > 0 then self.spring:pull(0.05, 200, 10) end
       for _, enemy in ipairs(enemies) do
         hit2:play{pitch = random:float(0.8, 1.2), volume = 0.2}
-        enemy:hit((self.dot_dmg_m or 1)*self.dmg/5, self, true)
+        enemy:hit((self.dot_dmg_m or 1)*self.dmg/2.5, self, true)
         HitCircle{group = main.current.effects, x = enemy.x, y = enemy.y, rs = 6, color = fg[0], duration = 0.1}
         for i = 1, 1 do HitParticle{group = main.current.effects, x = enemy.x, y = enemy.y, color = self.color} end
         for i = 1, 1 do HitParticle{group = main.current.effects, x = enemy.x, y = enemy.y, color = enemy.color} end
@@ -2749,25 +2776,29 @@ function ForceArea:init(args)
         elementor1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
         local enemies = main.current.main:get_objects_in_shape(self.shape, main.current.enemies)
         for _, enemy in ipairs(enemies) do
-          enemy:hit(4*self.parent.dmg)
-          enemy:push(50*(self.knockback_m or 1), self:angle_to_object(enemy))
+          enemy:hit(16*self.parent.dmg)
+          enemy:push(10*(self.knockback_m or 1), self:angle_to_object(enemy))
         end
       end
     end)
 
   elseif self.character == 'gravity_field' then
     elementor1:play{pitch = random:float(0.9, 1.1), volume = 0.4}
-    self.t:tween(1, self, {dvr = 0}, math.linear)
+    self.t:tween(3, self, {dvr = 0}, math.linear)
 
-    self.t:during(1, function()
+    self.t:during(3, function()
       local enemies = main.current.main:get_objects_in_shape(self.shape, main.current.enemies)
       local t = self.t:get_during_elapsed_time('gravity_field')
       for _, enemy in ipairs(enemies) do
         enemy:apply_steering_force(400*(1-t), enemy:angle_to_point(self.x, self.y))
       end
     end, nil, 'gravity_field')
-    self.t:after(1 - 0.35, function()
+    self.t:after(3 - 0.35, function()
+      local enemies = main.current.main:get_objects_in_shape(self.shape, main.current.enemies)
       self.t:every_immediate(0.05, function() self.hidden = not self.hidden end, 7, function() self.dead = true end)
+      for _, enemy in ipairs(enemies) do
+        enemy:push(200 * (self.knockback_m or 1), self:angle_to_object(enemy))
+      end
     end)
   end
 end
@@ -2814,10 +2845,10 @@ function Tree:init(args)
   self.t:tween(0.05, self, {rs = args.rs}, math.cubic_in_out, function() self.spring:pull(0.15) end)
   self.t:after(0.2, function() self.color = args.color end)
 
-  self.t:every(self.parent.level == 3 and 3 or 6, function()
+  self.t:every(self.parent.level == 3 and 2 or 6, function()
     self.hfx:use('hit', 0.2)
     HealingOrb{group = main.current.main, x = self.x, y = self.y}
-    if self.parent.taunt and random:bool((self.parent.taunt == 1 and 10) or (self.parent.taunt == 2 and 20) or (self.parent.taunt == 3 and 30)) then
+    if self.parent.taunt and random:bool((self.parent.taunt == 1 and 15) or (self.parent.taunt == 2 and 30) or (self.parent.taunt == 3 and 45)) then
       local enemies = self:get_objects_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
 
       if #enemies > 0 then
@@ -2833,7 +2864,7 @@ function Tree:init(args)
         self.hfx:use('hit', 0.2)
         HealingOrb{group = main.current.main, x = self.x, y = self.y}
 
-        if self.parent.taunt and random:bool((self.parent.taunt == 1 and 10) or (self.parent.taunt == 2 and 20) or (self.parent.taunt == 3 and 30)) then
+        if self.parent.taunt and random:bool((self.parent.taunt == 1 and 15) or (self.parent.taunt == 2 and 30) or (self.parent.taunt == 3 and 45)) then
           local enemies = self:get_objects_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
           if #enemies > 0 then
             for _, enemy in ipairs(enemies) do
@@ -2927,7 +2958,7 @@ function Tree:init(args)
 
       if self.parent.construct_instability then
         camera:shake(2, 0.5)
-        local n = (self.parent.construct_instability == 1 and 1) or (self.parent.construct_instability == 2 and 1.5) or (self.parent.construct_instability == 3 and 2) or 1
+        local n = (self.parent.construct_instability == 1 and 2) or (self.parent.construct_instability == 2 and 3) or (self.parent.construct_instability == 3 and 4) or 1
         Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*48, color = self.color, dmg = n*self.parent.dmg*self.parent.area_dmg_m, parent = self.parent}
         _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
       end
@@ -3040,13 +3071,13 @@ function Volcano:init(args)
   camera:shake(6, 1)
   earth1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
   fire1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
-  self.t:every(self.level == 3 and 0.5 or 1, function()
+  self.t:every(self.level == 3 and 0.333 or 1, function()
     camera:shake(4, 0.5)
     _G[random:table{'earth1', 'earth2', 'earth3'}]:play{pitch = random:float(0.95, 1.05), volume = 0.25}
     _G[random:table{'fire1', 'fire2', 'fire3'}]:play{pitch = random:float(0.95, 1.05), volume = 0.25}
-    Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*72, r = random:float(0, 2*math.pi), color = self.color, dmg = (self.parent.area_dmg_m or 1)*self.parent.dmg,
+    Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*90, r = random:float(0, 2*math.pi), color = self.color, dmg = (self.parent.area_dmg_m or 1)*self.parent.dmg*1.5,
       character = self.parent.character, level = self.parent.level, parent = self, void_rift = self.parent.void_rift, echo_barrage = self.parent.echo_barrage}
-  end, self.level == 3 and 8 or 4)
+  end, self.level == 3 and 12 or 4)
 
   self.t:after(4, function()
     self.t:every_immediate(0.05, function() self.hidden = not self.hidden end, 7, function() self.dead = true end)
@@ -3088,7 +3119,7 @@ function Sentry:init(args)
   self:set_restitution(0.5)
   self.hfx:add('hit', 1)
 
-  self.t:after(15*(self.parent.conjurer_buff_m or 1), function()
+  self.t:after(20*(self.parent.conjurer_buff_m or 1), function()
     local n = n or random:int(3, 4)
     for i = 1, n do HitParticle{group = main.current.effects, x = self.x, y = self.y, r = random:float(0, 2*math.pi), color = self.color} end
     HitCircle{group = main.current.effects, x = self.x, y = self.y}:scale_down()
@@ -3096,7 +3127,7 @@ function Sentry:init(args)
 
     if self.parent.construct_instability then
       camera:shake(2, 0.5)
-      local n = (self.parent.construct_instability == 1 and 1) or (self.parent.construct_instability == 2 and 1.5) or (self.parent.construct_instability == 3 and 2) or 1
+      local n = (self.parent.construct_instability == 1 and 2) or (self.parent.construct_instability == 2 and 3) or (self.parent.construct_instability == 3 and 4) or 1
       Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*48, color = self.color, dmg = n*self.parent.dmg*self.parent.area_dmg_m, parent = self.parent}
       _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
     end
@@ -3112,14 +3143,14 @@ function Sentry:init(args)
           archer1:play{pitch = random:float(0.95, 1.05), volume = 0.35}
           HitCircle{group = main.current.effects, x = self.x + 0.8*self.shape.w*math.cos(r), y = self.y + 0.8*self.shape.w*math.sin(r), rs = 6}
           local t = {group = main.current.main, x = self.x + 1.6*self.shape.w*math.cos(r), y = self.y + 1.6*self.shape.w*math.sin(r), v = 200, r = r, color = self.color,
-          dmg = self.parent.dmg*(self.parent.conjurer_buff_m or 1), character = 'sentry', parent = self.parent, ricochet = self.parent.level == 3 and 2 or 0}
+          dmg = self.parent.dmg*(self.parent.conjurer_buff_m or 1), character = 'sentry', parent = self.parent, ricochet = self.parent.level == 3 and 5 or 0}
           Projectile(table.merge(t, mods or {}))
           r = r + math.pi/2
         end
       end)
     end
 
-    if self.parent.taunt and random:bool((self.parent.taunt == 1 and 10) or (self.parent.taunt == 2 and 20) or (self.parent.taunt == 3 and 30)) then
+    if self.parent.taunt and random:bool((self.parent.taunt == 1 and 15) or (self.parent.taunt == 2 and 30) or (self.parent.taunt == 3 and 45)) then
       local enemies = self:get_objects_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
       if #enemies > 0 then
         for _, enemy in ipairs(enemies) do
@@ -3137,12 +3168,12 @@ function Sentry:init(args)
           archer1:play{pitch = random:float(0.95, 1.05), volume = 0.35}
           HitCircle{group = main.current.effects, x = self.x + 0.8*self.shape.w*math.cos(r), y = self.y + 0.8*self.shape.w*math.sin(r), rs = 6}
           local t = {group = main.current.main, x = self.x + 1.6*self.shape.w*math.cos(r), y = self.y + 1.6*self.shape.w*math.sin(r), v = 200, r = r, color = self.color,
-          dmg = self.parent.dmg*(self.parent.conjurer_buff_m or 1), character = 'sentry', parent = self.parent, ricochet = self.parent.level == 3 and 2 or 0}
+          dmg = self.parent.dmg*(self.parent.conjurer_buff_m or 1), character = 'sentry', parent = self.parent, ricochet = self.parent.level == 3 and 3 or 0}
           Projectile(table.merge(t, mods or {}))
           r = r + math.pi/2
         end
 
-        if self.parent.taunt and random:bool((self.parent.taunt == 1 and 10) or (self.parent.taunt == 2 and 20) or (self.parent.taunt == 3 and 30)) then
+        if self.parent.taunt and random:bool((self.parent.taunt == 1 and 15) or (self.parent.taunt == 2 and 30) or (self.parent.taunt == 3 and 45)) then
           local enemies = self:get_objects_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
           if #enemies > 0 then
             for _, enemy in ipairs(enemies) do
@@ -3161,7 +3192,7 @@ function Sentry:update(dt)
   self:update_game_object(dt)
   self.r = self.r + math.pi*dt
   self:set_angle(self.r)
-  self.t:set_every_multiplier('attack', self.parent.level == 3 and 0.75 or 1)
+  self.t:set_every_multiplier('attack', self.parent.level == 3 and 0.4 or self.parent.level == 2 and 0.7 or 1)
 end
 
 
@@ -3199,7 +3230,7 @@ function Turret:init(args)
       turret2:play{pitch = random:float(0.95, 1.05), volume = 0.35}
     end, 3)
 
-    if self.parent.taunt and random:bool((self.parent.taunt == 1 and 10) or (self.parent.taunt == 2 and 20) or (self.parent.taunt == 3 and 30)) then
+    if self.parent.taunt and random:bool((self.parent.taunt == 1 and 15) or (self.parent.taunt == 2 and 30) or (self.parent.taunt == 3 and 45)) then
       local enemies = self:get_objects_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
       if #enemies > 0 then
         for _, enemy in ipairs(enemies) do
@@ -3221,7 +3252,7 @@ function Turret:init(args)
           turret2:play{pitch = random:float(0.95, 1.05), volume = 0.35}
         end, 3)
 
-        if self.parent.taunt and random:bool((self.parent.taunt == 1 and 10) or (self.parent.taunt == 2 and 20) or (self.parent.taunt == 3 and 30)) then
+        if self.parent.taunt and random:bool((self.parent.taunt == 1 and 15) or (self.parent.taunt == 2 and 30) or (self.parent.taunt == 3 and 45)) then
           local enemies = self:get_objects_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
           if #enemies > 0 then
             for _, enemy in ipairs(enemies) do
@@ -3242,7 +3273,7 @@ function Turret:init(args)
 
     if self.parent.construct_instability then
       camera:shake(2, 0.5)
-      local n = (self.parent.construct_instability == 1 and 1) or (self.parent.construct_instability == 2 and 1.5) or (self.parent.construct_instability == 3 and 2) or 1
+      local n = (self.parent.construct_instability == 1 and 2) or (self.parent.construct_instability == 2 and 3) or (self.parent.construct_instability == 3 and 4) or 1
       Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*48, color = self.color, dmg = n*self.parent.dmg*self.parent.area_dmg_m, parent = self.parent}
       _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
     end
@@ -3274,8 +3305,8 @@ end
 
 
 function Turret:upgrade()
-  self.upgrade_dmg_m = self.upgrade_dmg_m + 0.5
-  self.upgrade_aspd_m = self.upgrade_aspd_m + 0.5
+  self.upgrade_dmg_m = self.upgrade_dmg_m + 1
+  self.upgrade_aspd_m = self.upgrade_aspd_m + 1
   for i = 1, 6 do HitParticle{group = main.current.effects, x = self.x, y = self.y, r = random:float(0, 2*math.pi), color = self.color} end
   HitCircle{group = main.current.effects, x = self.x, y = self.y}:scale_down()
 end
@@ -3339,7 +3370,7 @@ function Pet:on_collision_enter(other, contact)
 
       if self.parent.construct_instability then
         camera:shake(2, 0.5)
-        local n = (self.parent.construct_instability == 1 and 1) or (self.parent.construct_instability == 2 and 1.5) or (self.parent.construct_instability == 3 and 2) or 1
+        local n = (self.parent.construct_instability == 1 and 2) or (self.parent.construct_instability == 2 and 3) or (self.parent.construct_instability == 3 and 4) or 1
         Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*48, color = self.color, dmg = n*self.parent.dmg*self.parent.area_dmg_m, parent = self.parent}
         _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
       end
@@ -3386,7 +3417,7 @@ function Bomb:init(args)
   
   mine1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
   self.color = orange[0]
-  self.dmg = 2*get_character_stat('bomber', self.level, 'dmg')
+  self.dmg = 3*get_character_stat('bomber', self.level, 'dmg')
   self.t:after(8, function() self:explode() end)
 end
 
@@ -3405,8 +3436,8 @@ end
 
 function Bomb:explode()
   camera:shake(4, 0.5)
-  local t = {group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*64*(self.level == 3 and 2 or 1), color = self.color, 
-    dmg = self.parent.area_dmg_m*self.dmg*(self.parent.conjurer_buff_m or 1)*(self.level == 3 and 2 or 1), character = self.character, parent = self.parent}
+  local t = {group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*64*(self.level == 3 and 3 or 1), color = self.color, 
+    dmg = self.parent.area_dmg_m*self.dmg*(self.parent.conjurer_buff_m or 1)*(self.level == 3 and 3 or 1), character = self.character, parent = self.parent}
   Area(table.merge(t, mods or {}))
   if not self.parent.construct_instability and not self.parent.rearm then self.dead = true end
   _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
@@ -3416,18 +3447,18 @@ function Bomb:explode()
   self.t:after(0.25, function()
     if self.parent.construct_instability then
       camera:shake(2, 0.5)
-      local n = (self.parent.construct_instability == 1 and 1) or (self.parent.construct_instability == 2 and 1.5) or (self.parent.construct_instability == 3 and 2) or 1
-      Area{group = main.current.effects, x = self.x, y = self.y, r = self.r + random:float(-math.pi/16, math.pi/16), w = self.parent.area_size_m*48*(self.level == 3 and 2 or 1), color = self.color, 
-        dmg = n*self.parent.dmg*self.parent.area_dmg_m*(self.level == 3 and 2 or 1), parent = self.parent}
+      local n = (self.parent.construct_instability == 1 and 2) or (self.parent.construct_instability == 2 and 3) or (self.parent.construct_instability == 3 and 4) or 1
+      Area{group = main.current.effects, x = self.x, y = self.y, r = self.r + random:float(-math.pi/16, math.pi/16), w = self.parent.area_size_m*48*(self.level == 3 and 3 or 1), color = self.color, 
+        dmg = n*self.parent.dmg*self.parent.area_dmg_m*(self.level == 3 and 3 or 1), parent = self.parent}
       _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
       self.dead = true
     end
 
     if self.parent.rearm then
       camera:shake(2, 0.5)
-      local n = (self.parent.construct_instability == 1 and 1) or (self.parent.construct_instability == 2 and 1.5) or (self.parent.construct_instability == 3 and 2) or 1
-      Area{group = main.current.effects, x = self.x, y = self.y, r = self.r + random:float(-math.pi/16, math.pi/16), w = self.parent.area_size_m*48*(self.level == 3 and 2 or 1), color = self.color,
-        dmg = n*self.parent.dmg*self.parent.area_dmg_m*(self.level == 3 and 2 or 1), parent = self.parent}
+      local n = (self.parent.construct_instability == 1 and 2) or (self.parent.construct_instability == 2 and 3) or (self.parent.construct_instability == 3 and 4) or 1
+      Area{group = main.current.effects, x = self.x, y = self.y, r = self.r + random:float(-math.pi/16, math.pi/16), w = self.parent.area_size_m*48*(self.level == 3 and 3 or 1), color = self.color,
+        dmg = n*self.parent.dmg*self.parent.area_dmg_m*(self.level == 3 and 3 or 1), parent = self.parent}
       _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
       self.dead = true
     end
@@ -3505,7 +3536,7 @@ function Saboteur:on_collision_enter(other, contact)
     if self.parent.construct_instability then
       self.t:after(0.25, function()
         camera:shake(2, 0.5)
-        local n = (self.parent.construct_instability == 1 and 1) or (self.parent.construct_instability == 2 and 1.5) or (self.parent.construct_instability == 3 and 2) or 1
+        local n = (self.parent.construct_instability == 1 and 2) or (self.parent.construct_instability == 2 and 3) or (self.parent.construct_instability == 3 and 4) or 1
         Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*48, color = self.color, dmg = n*self.parent.dmg*self.parent.area_dmg_m, parent = self.parent}
         _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
         self.dead = true
@@ -3564,7 +3595,7 @@ function Automaton:init(args)
       end)
     end
 
-    if self.parent.taunt and random:bool((self.parent.taunt == 1 and 10) or (self.parent.taunt == 2 and 20) or (self.parent.taunt == 3 and 30)) then
+    if self.parent.taunt and random:bool((self.parent.taunt == 1 and 15) or (self.parent.taunt == 2 and 30) or (self.parent.taunt == 3 and 45)) then
       local enemies = self:get_objects_in_shape(Circle(self.x, self.y, 96), main.current.enemies)
       if #enemies > 0 then
         for _, enemy in ipairs(enemies) do
@@ -3591,7 +3622,7 @@ function Automaton:init(args)
 
     if self.parent.construct_instability then
       camera:shake(2, 0.5)
-      local n = (self.parent.construct_instability == 1 and 1) or (self.parent.construct_instability == 2 and 1.5) or (self.parent.construct_instability == 3 and 2) or 1
+      local n = (self.parent.construct_instability == 1 and 2) or (self.parent.construct_instability == 2 and 3) or (self.parent.construct_instability == 3 and 4) or 1
       Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*48, color = self.color, dmg = n*self.parent.dmg*self.parent.area_dmg_m, parent = self.parent}
       _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
     end
@@ -3620,7 +3651,7 @@ function Automaton:update(dt)
   end
   self.r = self:get_angle()
 
-  self.t:set_every_multiplier('shoot', self.parent.level == 3 and 0.75 or 1)
+  self.t:set_every_multiplier('shoot', self.parent.level == 3 and 0.5 or 1)
   self.attack_sensor:move_to(self.x, self.y)
 end
 
@@ -3764,7 +3795,7 @@ function HealingOrb:init(args)
   self.magnet_sensor = Circle(self.x, self.y, 56)
 
   if main.current.healer_level > 0 and not self.healer_effect_orb then
-    if random:bool((main.current.healer_level == 1 and 15) or (main.current.healer_level == 2 and 30)) then
+    if random:bool((main.current.healer_level == 1 and 20) or (main.current.healer_level == 2 and 40)) then
       SpawnEffect{group = main.current.effects, x = self.x, y = self.y, color = green[0], action = function(x, y)
         HealingOrb{group = main.current.main, x = x, y = y, healer_effect_orb = true}
       end}
@@ -3952,7 +3983,7 @@ function Critter:die(x, y, r, n)
   if main.current.player.baneling_burst then
     camera:shake(2, 0.5)
     Area{group = main.current.effects, x = self.x, y = self.y, r = self.r, w = self.parent.area_size_m*24, color = self.color,
-      dmg = (main.current.player.baneling_burst == 1 and 50) or (main.current.player.baneling_burst == 2 and 100) or (main.current.player.baneling_burst == 3 and 150) or 0, parent = self.parent}
+      dmg = (main.current.player.baneling_burst == 1 and 2*self.hp) or (main.current.player.baneling_burst == 2 and 3*self.hp) or (main.current.player.baneling_burst == 3 and 4*self.hp) or 0, parent = self.parent}
     _G[random:table{'cannoneer1', 'cannoneer2'}]:play{pitch = random:float(0.95, 1.05), volume = 0.5}
   end
 end
