@@ -485,7 +485,7 @@ function Player:init(args)
 
   elseif self.character == 'pyromancer' then
     self.t:after(0.01, function()
-      self.dot_area = DotArea{group = main.current.effects, x = self.x, y = self.y, rs = self.area_size_m*42+(6*self.level), color = self.color, dmg = self.area_dmg_m*self.dmg, character = self.character, level = self.level, parent = self}
+      self.dot_area = DotArea{group = main.current.effects, x = self.x, y = self.y, rs = self.area_size_m*38+(10*self.level), color = self.color, dmg = self.area_dmg_m*self.dmg, character = self.character, level = self.level, parent = self}
     end)
 
   elseif self.character == 'corruptor' then
@@ -499,7 +499,7 @@ function Player:init(args)
 
   elseif self.character == 'beastmaster' then
     self.attack_sensor = Circle(self.x, self.y, 160)
-    self.t:cooldown(2, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
+    self.t:cooldown(1.5, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       local closest_enemy = self:get_closest_object_in_shape(self.attack_sensor, main.current.enemies)
       if closest_enemy then
         self:shoot(self:angle_to_object(closest_enemy), {spawn_critters_on_crit = 2})
@@ -624,7 +624,7 @@ function Player:init(args)
     self.t:cooldown(6, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       buff1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
       local enemies = table.first2(table.shuffle(self:get_objects_in_shape(self.wide_attack_sensor, main.current.enemies)),
-        6 + ((self.malediction == 1 and 1) or (self.malediction == 2 and 3) or (self.malediction == 3 and 5) or 0) + ((main.current.curser_level == 2 and 3) or (main.current.curser_level == 1 and 1) or 0))
+        8 + ((self.malediction == 1 and 1) or (self.malediction == 2 and 3) or (self.malediction == 3 and 5) or 0) + ((main.current.curser_level == 2 and 3) or (main.current.curser_level == 1 and 1) or 0))
       for _, enemy in ipairs(enemies) do
         enemy:curse('bane', 6*(self.hex_duration_m or 1), self.level == 3, self)
         HitCircle{group = main.current.effects, x = self.x, y = self.y, rs = 6, color = purple[0], duration = 0.1}
@@ -825,8 +825,8 @@ function Player:init(args)
     end, nil, nil, 'heal')
 
   elseif self.character == 'infestor' then
-    self.attack_sensor = Circle(self.x, self.y, 64)
-    self.wide_attack_sensor = Circle(self.x, self.y, 128)
+    self.attack_sensor = Circle(self.x, self.y, 96)
+    self.wide_attack_sensor = Circle(self.x, self.y, 160)
     self.t:cooldown(6, function() local enemies = self:get_objects_in_shape(self.attack_sensor, main.current.enemies); return enemies and #enemies > 0 end, function()
       buff1:play{pitch = random:float(0.9, 1.1), volume = 0.5}
       local enemies = table.first2(table.shuffle(self:get_objects_in_shape(self.wide_attack_sensor, main.current.enemies)),
@@ -1539,7 +1539,7 @@ function Player:hit(damage, from_undead)
   if self.character == 'beastmaster' and self.level == 3 then
     critter1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
     trigger:after(0.01, function()
-      for i = 1, 4 do
+      for i = 1, 5 do
         Critter{group = main.current.main, x = self.x, y = self.y, color = orange[0], r = random:float(0, 2*math.pi), v = 20, dmg = self.dmg, parent = self}
       end
     end)
