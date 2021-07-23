@@ -81,6 +81,7 @@ function MainMenu:on_enter(from)
   end
 
   self.title_text = Text({{text = '[wavy_mid, fg]SNKRX', font = fat_font, alignment = 'center'}}, global_text_tags)
+  self.title_text2 = Text({{text = "[wavy_mid, blue]Balanced", font = fat_font, alignment = 'center'}}, global_text_tags)
 
   self.arena_run_button = Button{group = self.main_ui, x = 55, y = gh/2 - 10, force_update = true, button_text = 'arena run', fg_color = 'bg10', bg_color = 'bg', action = function(b)
     ui_transition2:play{pitch = random:float(0.95, 1.05), volume = 0.5}
@@ -185,6 +186,7 @@ function MainMenu:update(dt)
     self.effects:update(dt*slow_amount)
     self.main_ui:update(dt*slow_amount)
     if self.title_text then self.title_text:update(dt) end
+    if self.title_text2 then self.title_text2:update(dt) end
     self.ui:update(dt*slow_amount)
   else
     self.ui:update(dt*slow_amount)
@@ -208,6 +210,7 @@ function MainMenu:draw()
 
   self.main_ui:draw()
   self.title_text:draw(60, gh/2 - 40)
+  self.title_text2:draw(80, gh/2 - 65)
   if self.paused then graphics.rectangle(gw/2, gh/2, 2*gw, 2*gh, nil, nil, modal_transparent) end
   self.ui:draw()
 end
