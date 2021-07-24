@@ -2845,7 +2845,7 @@ function Tree:init(args)
   self.t:tween(0.05, self, {rs = args.rs}, math.cubic_in_out, function() self.spring:pull(0.15) end)
   self.t:after(0.2, function() self.color = args.color end)
 
-  self.t:every(self.parent.level == 3 and 2 or 6, function()
+  self.t:every(self.parent.level == 3 and 3 or 6, function()
     self.hfx:use('hit', 0.2)
     HealingOrb{group = main.current.main, x = self.x, y = self.y}
     if self.parent.taunt and random:bool((self.parent.taunt == 1 and 15) or (self.parent.taunt == 2 and 30) or (self.parent.taunt == 3 and 45)) then

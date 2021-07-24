@@ -398,7 +398,7 @@ function Arena:update(dt)
           'intimidation', 'vulnerability', 'temporal_chains', 'ceremonial_dagger', 'homing_barrage', 'critical_strike', 'noxious_strike', 'infesting_strike', 'burning_strike', 'lucky_strike', 'healing_strike', 'stunning_strike',
           'silencing_strike', 'culling_strike', 'lightning_strike', 'psycholeak', 'divine_blessing', 'hardening', 'kinetic_strike',
         }
-        max_units = math.clamp(7 + current_new_game_plus + self.loop, 7, 12)
+        max_units = math.clamp(7 + current_new_game_plus + self.loop*2, 7, 12)
         main:add(BuyScreen'buy_screen')
         locked_state = nil
         system.save_run()
@@ -446,7 +446,7 @@ function Arena:quit()
       end
       current_new_game_plus = current_new_game_plus + 1
       state.current_new_game_plus = current_new_game_plus
-      max_units = math.clamp(7 + current_new_game_plus + self.loop, 7, 12)
+      max_units = math.clamp(7 + current_new_game_plus + 2*self.loop, 7, 12)
 
       system.save_run()
       trigger:tween(1, _G, {slow_amount = 0}, math.linear, function() slow_amount = 0 end, 'slow_amount')
@@ -473,12 +473,12 @@ function Arena:quit()
           ItemCard{group = self.ui, x = 120 + (i-1)*30, y = 20, w = 30, h = 45, sx = 0.75, sy = 0.75, force_update = true, passive = passive.passive , level = passive.level, xp = passive.xp, parent = self}
         end
 
-        if current_new_game_plus == 6 then
+        if current_new_game_plus == 8 then
           if current_new_game_plus == new_game_plus then
-            new_game_plus = 5
+            new_game_plus = 7
             state.new_game_plus = new_game_plus
           end
-          current_new_game_plus = 5
+          current_new_game_plus = 7
           state.current_new_game_plus = current_new_game_plus
           max_units = 12
 
@@ -886,7 +886,7 @@ end
 function Arena:endless()
   if self.clicked_loop then return end
   self.clicked_loop = true
-  if current_new_game_plus >= 5 then current_new_game_plus = 5
+  if current_new_game_plus >= 7 then current_new_game_plus = 7
   else current_new_game_plus = current_new_game_plus - 1 end
   if current_new_game_plus < 0 then current_new_game_plus = 0 end
   self.loop = self.loop + 1

@@ -602,7 +602,7 @@ function init()
     ['cleric'] = function(lvl) return '[fg]creates [yellow]1[fg] healing orb every [yellow]8[fg] seconds' end,
     ['outlaw'] = function(lvl) return '[fg]throws a fan of [yellow]5[fg] knives, each dealing [yellow]' .. get_character_stat('outlaw', lvl, 'dmg') .. '[fg] damage' end,
     ['blade'] = function(lvl) return '[fg]throws multiple blades that deal [yellow]' .. get_character_stat('blade', lvl, 'dmg') .. ' AoE[fg] damage' end,
-    ['elementor'] = function(lvl) return '[fg]deals [yellow]' .. get_character_stat('elementor', lvl, 'dmg') .. ' AoE[fg] damage in a large area centered on a random target' end,
+    ['elementor'] = function(lvl) return '[fg]deals [yellow]' .. 1.5*get_character_stat('elementor', lvl, 'dmg') .. ' AoE[fg] damage in a large area centered on a random target' end,
     ['saboteur'] = function(lvl) return '[fg]calls [yellow]2[fg] saboteurs to seek targets and deal [yellow]' .. get_character_stat('saboteur', lvl, 'dmg') .. ' AoE[fg] damage' end,
     ['bomber'] = function(lvl) return '[fg]plants a bomb, when it explodes it deals [yellow]' .. 2*get_character_stat('bomber', lvl, 'dmg') .. ' AoE[fg] damage' end,
     ['stormweaver'] = function(lvl) return '[fg]infuses projectiles with chain lightning that deals [yellow]40%[fg] damage to [yellow]4[fg] enemies' end,
@@ -809,7 +809,7 @@ function init()
     ['jester'] = function() return '[fg]all knives seek enemies and pierce [yellow]2[fg] times' end,
     ['assassin'] = function() return '[fg]poison inflicted from crits deals [yellow]8x[fg] damage' end,
     ['host'] = function() return '[fg][yellow]+100%[fg] critter spawn rate and spawn [yellow]2[fg] critters instead' end,
-    ['carver'] = function() return '[fg]carves a tree that creates healing orbs [yellow]thrice[fg] as fast' end,
+    ['carver'] = function() return '[fg]carves a tree that creates healing orbs [yellow]twice[fg] as fast' end,
     ['bane'] = function() return "[yellow]100%[fg] increased area for bane's void rifts" end,
     ['psykino'] = function() return '[fg]enemies take [yellow]' .. 4*get_character_stat('psykino', 3, 'dmg') .. '[fg] damage and are pushed away when the area expires' end,
     ['barrager'] = function() return '[fg]every 3rd attack the barrage shoots [yellow]15[fg] projectiles and they push harder' end,
@@ -869,7 +869,7 @@ function init()
     ['jester'] = function() return '[light_bg]curses 6 enemies and all knives seek enemies and pierce 2 times' end,
     ['assassin'] = function() return '[light_bg]poison inflicted from crits deals 8x damage' end,
     ['host'] = function() return '[light_bg]+100% critter spawn rate and spawn 2 critters instead' end,
-    ['carver'] = function() return '[light_bg]carves a tree that creates healing orbs thrice as fast' end,
+    ['carver'] = function() return '[light_bg]carves a tree that creates healing orbs twice as fast' end,
     ['bane'] = function() return "[light_bg]100% increased area for bane's void rifts" end,
     ['psykino'] = function() return '[light_bg]enemies take ' .. 4*get_character_stat('psykino', 3, 'dmg') .. ' damage and are pushed away when the area expires' end,
     ['barrager'] = function() return '[light_bg]every 3rd attack the barrage shoots 15 projectiles and they push harder' end,
@@ -1513,7 +1513,7 @@ function init()
     [22] = {32, 32},
     [23] = {36, 36},
     [24] = {48, 48},
-    [25] = {100, 100},
+    [25] = {50, 50},
   }
 
   local k = 1
@@ -1521,7 +1521,7 @@ function init()
     local n = i % 25
     if n == 0 then
       n = 25
-      k = k + 1
+      k = k + 0.5
     end
     level_to_gold_gained[i] = {level_to_gold_gained[n][1]*k, level_to_gold_gained[n][2]*k}
   end
