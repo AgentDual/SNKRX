@@ -50,7 +50,7 @@ function Player:init(args)
     if self.level == 3 then
       self.t:every(12, function()
         self.magician_aspd_m = 1.5
-        self.t:after(6, function() self.magician_aspd_m = 1, 'magician_aspd_m')
+        self.t:after(6, function() self.magician_aspd_m = 1 end, 'magician_aspd_m')
       end)
     end
 
