@@ -62,7 +62,7 @@ Units:
 - Bomber does 50% more dmg and lvl 3 gives area size and dmg a buff of 150% instead of 100%
 - Beastmaster-Attacks 50% faster and lvl 3 spawns 5 critters on contact instead of 4
 - Artificer spawns an automation every 5 seconds instead of 6, automations move and shoot faster at lvl 3 and explodes into 12 projectiles
-- Carver spawns trees/totems 50% faster and spawns healing orbs three times as fast instead of two time at lvl 3
+- Carver spawns trees/totems 50% faster
 - Cannonneer is tier 3
 - Flagellant has 5x health at lvl 3
 - Psykeeper spawns healing orbs when it loses 20% of it's health, not 25 and lvl 3 does 3x dmg on contact instead of 2x
@@ -177,4 +177,10 @@ Items:
 - Divine Machine Arrow has a 15/25/35% chance to pierce 1/2/3 times
 
 Other Changes:
-Negative Defense is calculated properly
+- Negative Defense is calculated properly
+- Loop scaling has been changed such that tougher difficulty kicks in earlier so looping is enjoyable and not drawn out
+- Original loop scaling overtakes new scaling difficulty at level 174
+- The speed cap is still approximately the same as in base game
+- Level 25 gives half the gold it originally used to (also affects level 50,75,100,etc.)
+- The gold multiplier after each loop (not including first 25 levels) has been reduced by 50%
+- Maintenance Update 3 changes were included
