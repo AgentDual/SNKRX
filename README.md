@@ -21,8 +21,12 @@ All assets have their specific licenses and they are linked to in the game's cre
 
 ### Everything Mod Related
 
-This mod is meant to rebalance the game. Make items and units more viable, nerf the OP stuff and maybe more. 
-I'm planning to make this mod combine with Despacit2p0's mod but I'll include that in a different branch as I want to make this mod it's own standalone
+This modpack is literally 2 mods! Not much else to it, really. But I really want to add more mods and make this as good as possible before the rewrite goes live.
+If you have a mod you want included, let me know and I'll look into it
+
+In addition to compiling the mods, I will balance them if I find certain things are too weak or too powerful. 
+This means I may change whatever mod is included and that may not sit right with some people. That's perfectly fine.
+I will include the changes I personally made to the mods included in addition to what should be a good synopsis of each mod.
 
 If you're having difficulties opening the mod, just ask in the modding section or @ me in the discord server :)
 
@@ -30,7 +34,9 @@ Remember, this is an early version so changes may not be working properly. I als
 
 Last but not least, don't savescum. It really does ruin the game to a certain extent. I hope that you'll live up to my expectations! (Yes, this is emotional blackmail)
 
-There are many changes (Note that I may miss some important ones) in this mod but IMO, the most important changes are:
+
+BALANCED MOD
+
 - New item and unit descriptions
 - Ceremonial/Flying dagger nerf
 - Dividends should have a cap of 1000%
@@ -64,7 +70,7 @@ Units:
 - Artificer spawns an automation every 5 seconds instead of 6, automations move and shoot faster at lvl 3 and explodes into 12 projectiles
 - Carver spawns trees/totems 50% faster
 - Cannonneer is tier 3
-- Flagellant has 5x health at lvl 3
+- Flagellant has 5x health at lvl 3, gives 5% dmg buff at lvl 1 and 15% at lvl 3
 - Psykeeper spawns healing orbs when it loses 20% of it's health, not 25 and lvl 3 does 3x dmg on contact instead of 2x
 - Spellblade attacks twice as fast (probably will change)
 - Barrager attacks twice as fast and the knockback force is increased by 28% (at both lvl 1 and lvl 3)
@@ -183,4 +189,57 @@ Other Changes:
 - The speed cap is still approximately the same as in base game
 - Level 25 gives half the gold it originally used to (also affects level 50,75,100,etc.)
 - The gold multiplier after each loop (not including first 25 levels) has been reduced by 50%
+- 2 Units added per loop instead of 1 to make looping more fast-paced
 - Maintenance Update 3 changes were included
+
+
+DESPACIT MOD
+New Items, New Units, Large Critters & A Whole New Class!
+Weclome to the Despacit Mod!!!
+
+The New Class is called Cultist
+Cultists thrive off of the pain and suffering of others or even themselves!
+Cultists are powerful but can deal damage to themselves, other friendly units and the class abilty makes your cultists stronger the units are dead!
+
+Changed Units Are:
+Psykeeper- Now has a cultist tag instead of a psyker tag
+Beastmaster-Level 3 now spawns large critters on crit and has increased crit chance
+
+New Units Include:
+Sniper- A ranger, rogue and warrior that snipes enemies with a high caliber bullet that pierces
+Brawler- A warrior first, and a explorer second, the brawler likes dealing AoE damage up close and personal
+Psybanker- That one psyker accountant that engages in tax fraud and murder to make you way too much money for your own good
+Adventurer- A simple explorer, carrying a 4 burst assault rifle ready to wreck the enemies' day
+Mortar- A nuker and voider that burns the enemies to make sure they die...eventually
+Sylph- And I quote, "Yes, I am a forcer and yes, I love making everyone go into walls at high speeds"
+Blood Elf- A lifestealing ranger ready to heal and deal...some damage
+Psylander- A mysterious unit that has a psyker, warrior and cultist tag
+Locust- This nuker and swarmer spawns critters for every enemy in their sights...I mean AoE
+Boomerang- A magic unit with a magic boomerang fit for a sorcerer/ranger hybrid
+Rocketeer- "EXPLOSIONS!!! I mean, I was supposed to be a rogue and nuker in the original despacit mod but I guess I'm a ranger and nuker now" This also may or may not be tiny tina in SNKRX
+Initiate- A cultist ready to make you regret not joining their cult
+Necromancer- She turns pain and misery into critters as a cultist and swarmer
+Acolyte- A cult member building shrines for all her enemies as a builder
+Shaman- A master mage who joined the cult to learn the art of lightning magic and use it against her enemies
+
+Items:
+Critboost-Increases the chance of rogues critting
+Ritual- All cultists will gain damage for each attack
+Sacrifice- When a unit dies, the cultists regain health
+
+Modpack Changes:
+- Rocketeer was a rogue/nuker but now it is a ranger/nuker and has a larger AoE size
+- Rocketeer has a new lvl 3 ability because she can't crit
+- Psybanker now only gains interest for every 15 enemies killed instead of 10 with a cap of 8
+- Psybanker lvl 3 gives mercenaries 25% defense instead of 10% per mercenary
+- Cultist class was massively buffed (more dmg, atkspd, def and mvspd. Hp down)
+- Sniper has double atkspd and more pierce
+- Locust's aoe size went down very slightly
+- Sylph has a smaller area size and takes longer to attack
+- Acolyte does double the damage than it used to
+- Shaman's attack speed went up
+- Mortar attacks twice as fast
+- Brawler attacks 50% faster
+- Rogues used to have a crit bonus with 1 rogue. Decided not to add it in the overview of Despacit mod to avoid confusion
+
+
