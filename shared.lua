@@ -13,7 +13,9 @@ function shared_init()
     red = ColorRamp(Color'#e91d39', 0.025),
     purple = ColorRamp(Color'#8e559e', 0.025),
     blue2 = ColorRamp(Color'#4778ba', 0.025),
+    dblue = ColorRamp(Color'#4d46b8', 0.025),
     yellow2 = ColorRamp(Color'#f59f10', 0.025),
+    green2 = ColorRamp(Color'#22c748', 0.025),
   }
   for name, color in pairs(colors) do
     _G[name] = color
@@ -497,6 +499,7 @@ global_text_tags = {
   red = TextTag{draw = function(c, i, text) graphics.set_color(red[0]) end},
   orange = TextTag{draw = function(c, i, text) graphics.set_color(orange[0]) end},
   yellow = TextTag{draw = function(c, i, text) graphics.set_color(yellow[0]) end},
+  dblue = TextTag{draw = function(c, i, text) graphics.set_color(dblue[0]) end},
   yellow2 = TextTag{draw = function(c, i, text) graphics.set_color(yellow2[0]) end},
   green = TextTag{draw = function(c, i, text) graphics.set_color(green[0]) end},
   purple = TextTag{draw = function(c, i, text) graphics.set_color(purple[0]) end},

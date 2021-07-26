@@ -61,6 +61,8 @@ function Arena:on_enter(from, level, loop, units, passives, shop_level, shop_xp,
   self.gold_picked_up = 0
   self.damage_dealt = 0
   self.damage_taken = 0
+  self.enemiesKilled = 0
+  self.unitsDead = 0
   self.main_slow_amount = 1
   self.enemies = {Seeker, EnemyCritter}
   self.color = self.color or fg[0]
@@ -288,6 +290,7 @@ function Arena:on_enter(from, level, loop, units, passives, shop_level, shop_xp,
   self.conjurer_level = class_levels.conjurer
   self.sorcerer_level = class_levels.sorcerer
   self.mercenary_level = class_levels.mercenary
+  self.cultist_level = class_levels.cultist
 
   self.t:every(0.375, function()
     local p = random:table(star_positions)
@@ -473,12 +476,12 @@ function Arena:quit()
           ItemCard{group = self.ui, x = 120 + (i-1)*30, y = 20, w = 30, h = 45, sx = 0.75, sy = 0.75, force_update = true, passive = passive.passive , level = passive.level, xp = passive.xp, parent = self}
         end
 
-        if current_new_game_plus == 8 then
+        if current_new_game_plus == 11 then
           if current_new_game_plus == new_game_plus then
-            new_game_plus = 7
+            new_game_plus = 10
             state.new_game_plus = new_game_plus
           end
-          current_new_game_plus = 7
+          current_new_game_plus = 10
           state.current_new_game_plus = current_new_game_plus
           max_units = 12
 
@@ -536,7 +539,7 @@ function Arena:quit()
         steam.userStats.storeStats()
       end
 
-      if current_new_game_plus == 6 then
+      if current_new_game_plus == 11 then
         state.achievement_new_game_5 = true
         system.save_state()
         steam.userStats.setAchievement('GAME_COMPLETE')
@@ -886,7 +889,7 @@ end
 function Arena:endless()
   if self.clicked_loop then return end
   self.clicked_loop = true
-  if current_new_game_plus >= 7 then current_new_game_plus = 7
+  if current_new_game_plus >= 10 then current_new_game_plus = 10
   else current_new_game_plus = current_new_game_plus - 1 end
   if current_new_game_plus < 0 then current_new_game_plus = 0 end
   self.loop = self.loop + 1
@@ -975,8 +978,15 @@ function Arena:gain_gold()
       break
     end
   end
+  local psybanker
+  for _, unit in ipairs(self.starting_units) do
+    if unit.character == 'psybanker' then
+      psybanker = true
+      break
+    end
+  end
   self.gold_gained = random:int(level_to_gold_gained[self.level][1], level_to_gold_gained[self.level][2])
-  self.interest = math.min(math.floor(gold/5), 5) + math.min((merchant and math.floor(gold/10) or 0), 8)
+  self.interest = math.min(math.floor(gold/5), 5) + math.min((merchant and math.floor(gold/10) or 0), 8) +  math.min((psybanker and math.floor(self.enemiesKilled/15) or 0), 8)
   gold = gold + self.gold_gained + self.gold_picked_up + self.interest
 end
 
