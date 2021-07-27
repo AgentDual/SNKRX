@@ -1617,14 +1617,15 @@ function Player:update(dt)
     elseif main.current.cultist_level == 2 then self.cultist_stat_mult = 10
     elseif main.current.cultist_level == 1 then self.cultist_stat_mult = 5
     elseif main.current.cultist_level == 0 then self.cultist_stat_mult = 0 end
-  end
+  
 	
-  if (self.character == 'shaman' and self.level == 3) then
-		self.cultist_stat_mult = self.cultist_stat_mult + 5
-  end
+    if (self.character == 'shaman' and self.level == 3) then
+  	self.cultist_stat_mult = self.cultist_stat_mult + 5
+    end
 	
-  if (main.current.unitsDead) then
-		self.cultist_mult = 1 + (main.current.unitsDead*(self.cultist_stat_mult*0.01))
+    if (main.current.unitsDead) then
+	   self.cultist_mult = 1 + (main.current.unitsDead*(self.cultist_stat_mult*0.01))
+    end
   end
 
   if table.any(self.classes, function(v) return v == 'rogue' end) then
