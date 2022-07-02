@@ -81,7 +81,8 @@ function MainMenu:on_enter(from)
   end
 
   self.title_text = Text({{text = '[wavy_mid, fg]SNKRX', font = fat_font, alignment = 'center'}}, global_text_tags)
-  self.title_text2 = Text({{text = "[wavy_mid, blue]Balanced", font = fat_font, alignment = 'center'}}, global_text_tags)
+  self.title_text2 = Text({{text = "[wavy_mid, blue]Modpack", font = pixul_font, alignment = 'center'}}, global_text_tags)
+  self.title_text3 = Text({{text = "[wavy_mid, purple]Includes: Despacit Mod and Balanced Mod", font = pixul_font, alignment = 'center'}}, global_text_tags)
 
   self.arena_run_button = Button{group = self.main_ui, x = 55, y = gh/2 - 10, force_update = true, button_text = 'arena run', fg_color = 'bg10', bg_color = 'bg', action = function(b)
     ui_transition2:play{pitch = random:float(0.95, 1.05), volume = 0.5}
@@ -98,7 +99,7 @@ function MainMenu:on_enter(from)
         'assassination', 'flying_daggers', 'ultimatum', 'magnify', 'echo_barrage', 'unleash', 'reinforce', 'payback', 'enchanted', 'freezing_field', 'burning_field', 'gravity_field', 'magnetism',
         'insurance', 'dividends', 'berserking', 'unwavering_stance', 'unrelenting_stance', 'blessing', 'haste', 'divine_barrage', 'orbitism', 'psyker_orbs', 'psychosink', 'rearm', 'taunt', 'construct_instability',
         'intimidation', 'vulnerability', 'temporal_chains', 'ceremonial_dagger', 'homing_barrage', 'critical_strike', 'noxious_strike', 'infesting_strike', 'burning_strike', 'lucky_strike', 'healing_strike', 'stunning_strike',
-        'silencing_strike', 'culling_strike', 'lightning_strike', 'psycholeak', 'divine_blessing', 'hardening', 'kinetic_strike',
+        'silencing_strike', 'culling_strike', 'lightning_strike', 'psycholeak', 'divine_blessing', 'hardening', 'kinetic_strike', 'critboost', 'ritual', 'sacrifice',
       }
       run_time = run.time or 0
       gold = run.gold or 3
@@ -136,6 +137,13 @@ function MainMenu:on_enter(from)
     b.selected = true
     ui_switch1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
     system.open_url('https://discord.gg/Yjk2Q5gDqA')
+  end}
+  self.discord_button2 = Button{group = self.main_ui, x = gw - 79, y = 17, force_update = true, button_text = 'join the mod discord!', fg_color = 'bg10', bg_color = 'bg', action = function(b)
+    ui_switch2:play{pitch = random:float(0.95, 1.05), volume = 0.5}
+    b.spring:pull(0.2, 200, 10)
+    b.selected = true
+    ui_switch1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
+    system.open_url('https://discord.gg/MEXKSAWAU2')
   end}
 end
 
@@ -187,6 +195,7 @@ function MainMenu:update(dt)
     self.main_ui:update(dt*slow_amount)
     if self.title_text then self.title_text:update(dt) end
     if self.title_text2 then self.title_text2:update(dt) end
+    if self.title_text3 then self.title_text3:update(dt) end
     self.ui:update(dt*slow_amount)
   else
     self.ui:update(dt*slow_amount)
@@ -210,7 +219,8 @@ function MainMenu:draw()
 
   self.main_ui:draw()
   self.title_text:draw(60, gh/2 - 40)
-  self.title_text2:draw(80, gh/2 - 65)
+  self.title_text2:draw(61, gh/2 - 29)
+  self.title_text3:draw(128, 15)
   if self.paused then graphics.rectangle(gw/2, gh/2, 2*gw, 2*gh, nil, nil, modal_transparent) end
   self.ui:draw()
 end

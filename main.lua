@@ -151,6 +151,7 @@ function init()
   sorcerer = Image('sorcerer')
   mercenary = Image('mercenary')
   explorer = Image('explorer')
+  cultist = Image('cultist')
   star = Image('star')
   arrow = Image('arrow')
   centipede = Image('centipede')
@@ -237,6 +238,9 @@ function init()
   psycholeak = Image('psycholeak')
   divine_blessing = Image('divine_blessing')
   hardening = Image('hardening')
+  critboost = Image('criticalboost')
+  ritual = Image('ritual')
+  sacrifice = Image('sacrifice')
 
   class_colors = {
     ['warrior'] = yellow[0],
@@ -255,6 +259,7 @@ function init()
     ['sorcerer'] = blue2[0],
     ['mercenary'] = yellow2[0],
     ['explorer'] = fg[0],
+    ['cultist'] = dblue[0]
   }
 
   class_color_strings = {
@@ -274,6 +279,7 @@ function init()
     ['sorcerer'] = 'blue2',
     ['mercenary'] = 'yellow2',
     ['explorer'] = 'fg',
+     ['cultist'] = 'dblue'
   }
 
   character_names = {
@@ -334,6 +340,21 @@ function init()
     ['usurer'] = 'Usurer',
     ['gambler'] = 'Gambler',
     ['thief'] = 'Thief',
+    ['sniper'] = 'Sniper',
+    ['brawler'] = 'Brawler',
+    ['psybanker'] = 'Psybanker',
+	['adventurer'] = 'Adventurer',
+	['mortar'] = 'Mortar',
+	['sylph'] = 'Sylph',
+	['blood_elf'] = 'Blood Elf',
+	['psylander'] = 'Psylander',
+	['locust'] = 'Locust',
+	['boomerang'] = 'Boomerang',
+	['rocketeer'] = 'Rocketeer',
+	['initiate'] = 'Initiate',
+	['necromancer'] = 'Necromancer',
+	['acolyte'] = 'Acolyte',
+	['shaman'] = 'Shaman'
   }
 
   character_colors = {
@@ -380,7 +401,7 @@ function init()
     ['fairy'] = green[0],
     ['priest'] = green[0],
     ['infestor'] = orange[0],
-    ['flagellant'] = fg[0],
+    ['flagellant'] = dblue[0],
     ['arcanist'] = blue2[0],
     ['illusionist'] = blue2[0],
     ['artificer'] = blue2[0],
@@ -394,6 +415,21 @@ function init()
     ['usurer'] = purple[0],
     ['gambler'] = yellow2[0],
     ['thief'] = red[0],
+    ['sniper'] = green[0],
+    ['brawler'] = yellow[0],
+    ['psybanker'] = fg[0],
+	['adventurer'] = fg[0],
+	['mortar'] = red[0],
+	['sylph'] = yellow[0],
+	['blood_elf'] = red[0],
+	['psylander'] = fg[0],
+	['locust'] = orange[0],
+	['boomerang'] = green[0],
+	['rocketeer'] = red[0],
+	['initiate'] = dblue[0],
+	['necromancer'] = dblue[0],
+	['acolyte'] = dblue[0],
+	['shaman'] = dblue[0]
   }
 
   character_color_strings = {
@@ -440,7 +476,7 @@ function init()
     ['fairy'] = 'green',
     ['priest'] = 'green',
     ['infestor'] = 'orange',
-    ['flagellant'] = 'fg',
+    ['flagellant'] = 'dblue',
     ['arcanist'] = 'blue2',
     ['illusionist'] = 'blue2',
     ['artificer'] = 'blue2',
@@ -454,6 +490,21 @@ function init()
     ['usurer'] = 'purple',
     ['gambler'] = 'yellow2',
     ['thief'] = 'red',
+    ['sniper'] = 'green',
+    ['brawler'] = 'yellow',
+    ['psybanker'] = 'fg',
+	['adventurer'] = 'fg',
+	['mortar'] = 'red',
+	['sylph'] = 'yellow',
+	['blood_elf'] = 'red',
+	['psylander'] = 'fg',
+	['locust'] = 'orange',
+	['boomerang'] = 'green',
+	['rocketeer'] = 'green',
+	['initiate'] = 'dblue',
+	['necromancer'] = 'dblue',
+	['acolyte'] = 'dblue',
+	['shaman'] = 'dblue'
   }
 
   character_classes = {
@@ -500,7 +551,7 @@ function init()
     ['fairy'] = {'enchanter', 'healer'},
     ['priest'] = {'healer'},
     ['infestor'] = {'curser', 'swarmer'},
-    ['flagellant'] = {'psyker', 'enchanter'},
+    ['flagellant'] = {'psyker', 'enchanter', 'cultist'},
     ['arcanist'] = {'sorcerer'},
     -- ['illusionist'] = {'sorcerer', 'conjurer'},
     ['artificer'] = {'sorcerer', 'conjurer'},
@@ -514,6 +565,21 @@ function init()
     ['usurer'] = {'curser', 'mercenary', 'voider'},
     ['gambler'] = {'mercenary', 'sorcerer'},
     ['thief'] = {'rogue', 'mercenary'},
+    ['sniper'] = {'ranger', 'rogue', 'warrior'},
+	['brawler'] = {'explorer', 'warrior'},
+    ['psybanker'] = {'mercenary', 'psyker'},
+	['adventurer'] = {'explorer'},
+	['mortar'] = {'voider', 'nuker'},
+	['sylph'] = {'forcer'},
+	['blood_elf'] = {'healer', 'ranger'},
+	['psylander'] = {'psyker', 'warrior', 'cultist'},
+	['locust'] = {'swarmer', 'nuker'},
+	['boomerang'] = {'ranger', 'sorcerer'},
+	['rocketeer'] = {'ranger', 'nuker'},
+	['initiate'] = {'cultist'},
+	['necromancer'] = {'cultist', 'swarmer'},
+	['acolyte'] = {'conjurer', 'cultist'},
+	['shaman'] = {'mage', 'cultist'}
   }
 
   character_class_strings = {
@@ -560,7 +626,7 @@ function init()
     ['fairy'] = '[blue]Enchanter, [green]Healer',
     ['priest'] = '[green]Healer',
     ['infestor'] = '[purple]Curser, [orange]Swarmer',
-    ['flagellant'] = '[fg]Psyker, [blue]Enchanter',
+    ['flagellant'] = '[fg]Psyker, [blue]Enchanter', '[dBlue]Cultist',
     ['arcanist'] = '[blue2]Sorcerer',
     -- ['illusionist'] = '[blue2]Sorcerer, [orange]Conjurer',
     ['artificer'] = '[blue2]Sorcerer, [orange]Builder',
@@ -574,6 +640,21 @@ function init()
     ['usurer'] = '[purple]Curser, [yellow2]Mercenary, [purple]Voider',
     ['gambler'] = '[yellow2]Mercenary, [blue2]Sorcerer',
     ['thief'] = '[red]Rogue, [yellow2]Mercenary',
+    ['sniper'] = '[green]Ranger, [red]Rogue, [yellow]Warrior',
+    ['brawler'] = '[fg]Explorer, [yellow]Warrior',
+    ['psybanker'] = '[yellow2]Mercenary, [fg]Psyker',
+    ['adventurer'] = '[fg]Explorer',
+    ['mortar'] = '[purple]Voider, [red]Nuker',
+    ['sylph'] = '[yellow]Forcer',
+    ['blood_elf'] = '[green]Healer, Ranger',
+    ['psylander'] = '[fg]Psyker, [yellow]Warrior, [dblue]Cultist',
+    ['locust'] = '[orange]Swarmer, [red]Nuker',
+	['boomerang'] = '[green]Ranger, [blue2]Sorcerer',
+	['rocketeer'] = '[green]Ranger, Nuker',
+	['initiate'] = '[dblue]Cultist',
+	['necromancer'] = '[dblue]Cultist, [orange]Swarmer',
+	['acolyte'] = '[orange]Builder, [dblue]Cultist',
+	['shaman'] = '[blue]Mage, [dblue]Cultist'
   }
 
   get_character_stat_string = function(character, level)
@@ -637,7 +718,7 @@ function init()
     ['fairy'] = function(lvl) return '[fg]creates [yellow]1[fg] healing orb and grants [yellow]1[fg] unit [yellow]+100%[fg] attack speed for [yellow]6[fg] seconds' end,
     ['priest'] = function(lvl) return '[fg]creates [yellow]3[fg] healing orbs every [yellow]12[fg] seconds' end,
     ['infestor'] = function(lvl) return '[fg]curses [yellow]8[fg] nearby enemies for [yellow]6[fg] seconds, they will release [yellow]2[fg] critters on death' end,
-    ['flagellant'] = function(lvl) return '[fg]deals [yellow]' .. 2*get_character_stat('flagellant', lvl, 'dmg') .. '[fg] damage to self and grants [yellow]+4%[fg] damage to all allies per cast' end,
+    ['flagellant'] = function(lvl) return '[fg]deals [yellow]' .. 2*get_character_stat('flagellant', lvl, 'dmg') .. '[fg] damage to self and grants [yellow]+5%[fg] damage to all allies per cast' end,
     ['arcanist'] = function(lvl) return '[fg]launches a slow moving orb that launches projectiles, each dealing [yellow]' .. get_character_stat('arcanist', lvl, 'dmg') .. '[fg] damage' end,
     ['illusionist'] = function(lvl) return '[fg]launches a projectile that deals [yellow]' .. get_character_stat('illusionist', lvl, 'dmg') .. '[fg] damage and creates copies that do the same' end,
     ['artificer'] = function(lvl) return '[fg]spawns an automaton that shoots a projectile that deals [yellow]' .. get_character_stat('artificer', lvl, 'dmg') .. '[fg] damage' end,
@@ -651,6 +732,21 @@ function init()
     ['usurer'] = function(lvl) return '[fg]curses [yellow]3[fg] nearby enemies indefinitely with debt, dealing [yellow]' .. get_character_stat('usurer', lvl, 'dmg') .. '[fg] damage per second' end,
     ['gambler'] = function(lvl) return '[fg]deal [yellow]2X[fg] damage to a single random enemy where X is how much gold you have' end,
     ['thief'] = function(lvl) return '[fg]throws a knife that deals [yellow]' .. 2*get_character_stat('thief', lvl, 'dmg') .. '[fg] damage and chains [yellow]5[fg] times' end,
+    ['sniper'] = function(lvl) return '[fg]fires a long-ranged piercing bullet that deals [yellow]' .. get_character_stat('sniper', lvl, 'dmg') .. '[fg] damage' end,
+    ['brawler'] = function(lvl) return '[fg]deals [yellow]' .. get_character_stat('brawler', lvl, 'dmg') .. '[fg] AoE damage' end,
+    ['psybanker'] = function(lvl) return '[fg]gain [yellow]+X/15[fg] interest, where X is enemies killed this round with an interest cap of 8' end,
+    ['adventurer'] = function(lvl) return '[fg]fires a volley of 4 projectile that do [yellow]'..get_character_stat('adventurer', lvl, 'dmg')..'[fg] damage each' end,
+	['mortar'] = function(lvl) return '[fg]creates an area around the closest enemy that does [yellow]' .. get_character_stat('mortar', lvl, 'dmg') .. '[fg] damage per second' end,
+    ['sylph'] = function(lvl) return '[fg]creates an area that knocks away enemies and deals [yellow]'..get_character_stat('sylph', lvl, 'dmg')..'[fg] damage' end,
+    ['blood_elf'] = function(lvl) return '[fg]fires an arrow that deals [yellow]'..get_character_stat('sylph', lvl, 'dmg')..'[fg] damage and spawns a healing orb' end,
+    ['psylander'] = function(lvl) return '[fg]deals [yellow]'..4*get_character_stat('psylander', lvl, 'dmg')..'[fg] damage per second to nearby enemies' end,
+    ['locust'] = function(lvl) return '[fg]spawns an AoE field that creates [yellow]1[fg] critter per enemy' end,
+	['boomerang'] = function(lvl) return '[fg]throws a magic boomerang that deals [yellow]'..get_character_stat('boomerang', lvl, 'dmg')..'[fg] damage and ricochets' end,
+	['rocketeer'] = function(lvl) return '[fg]fires a rocket that deals [yellow]'..get_character_stat('rocketeer', lvl, 'dmg')..'[fg] AoE damage' end,
+	['initiate'] = function(lvl) return '[fg]shoots a bolt that deals [yellow]'..3*get_character_stat('initiate', lvl, 'dmg')..'[fg] dmg to an enemy and [yellow]'..0.5*get_character_stat('initiate', lvl, 'dmg')..'[fg] dmg to a random ally' end,
+    ['necromancer'] = function(lvl) return '[fg]deals [yellow]'..get_character_stat('necromancer', lvl, 'dmg')..'[fg] damage to a random ally and spawns [yellow]1[fg] large critter' end,
+	['acolyte'] = function(lvl) return '[fg]deals [yellow]'..get_character_stat('acolyte', lvl, 'dmg')..'[fg] damage to itself, spawns an altar that deals DoT to nearby enemies' end,
+	['shaman'] = function(lvl) return '[fg]summons lightning that deals [yellow]'..get_character_stat('shaman', lvl, 'dmg')..'[fg] damage to all nearby enemies' end,
   }
 
   character_effect_names = {
@@ -711,6 +807,21 @@ function init()
     ['usurer'] = '[purple]Bankruptcy',
     ['gambler'] = '[yellow2]Multicast',
     ['thief'] = '[red]Ultrakill',
+    ['sniper'] = '[red]Splinter',
+    ['brawler'] = '[fg]Avantgarde',
+    ['psybanker'] = '[fg]Safety Net',
+    ['adventurer'] = '[fg]Awakening',
+	['mortar'] = '[red]Hellfire Mortar',
+	['sylph'] = '[yellow]Impact Funnel',
+	['blood_elf'] = '[green]Lifesteal',
+	['psylander'] = '[fg]There Can Only Be One',
+	['locust'] = '[orange]Infinite Swarm',
+	['boomerang'] = '[green]Recursive Awe',
+	['rocketeer'] = '[red]Critical Burst',
+	['initiate'] = '[dblue]Ritual',
+	['necromancer'] = '[dblue]Soul Harvest',
+	['acolyte'] = '[dblue]Sacrifical Dagger',
+	['shaman'] = '[dblue]Spirit Intermediation'
   }
 
   character_effect_names_gray = {
@@ -771,6 +882,21 @@ function init()
     ['usurer'] = '[light_bg]Bankruptcy',
     ['gambler'] = '[light_bg]Multicast',
     ['thief'] = '[light_bg]Ultrakill',
+    ['sniper'] = '[light_bg]Splinter',
+    ['brawler'] = '[light_bg]Vanguard',
+    ['psybanker'] = '[light_bg]Safety Net',
+    ['adventurer'] = '[light_bg]Awakening',
+	['mortar'] = '[light_bg]Hellfire Mortar',
+	['sylph'] = '[light_bg]Impact Funnel',
+	['blood_elf'] = '[light_bg]Lifesteal',
+	['psylander'] = '[light_bg]There Can Be Only One',
+	['locust'] = '[light_bg]Infinite Swarm',
+	['boomerang'] = '[light_bg]Recursive Awe',
+	['rocketeer'] = '[light_bg]Critical Burst',
+	['initiate'] = '[light_bg]Ritual',
+	['necromancer'] = '[light_bg]Soul Harvest',
+	['acolyte'] = '[light_bg]Sacrifical Dagger',
+	['shaman'] = '[light_bg]Spirit Intermediation'
   }
 
   character_effect_descriptions = {
@@ -804,7 +930,7 @@ function init()
     ['cryomancer'] = function() return '[fg]enemies take 4x damage from the cryomancer' end,
     ['pyromancer'] = function() return '[fg]enemies killed by the pyromancer explode, dealing [yellow]' .. get_character_stat('pyromancer', 3, 'dmg') .. '[fg] AoE damage' end,
     ['corruptor'] = function() return '[fg]spawn [yellow]2[fg] small critters if the corruptor hits an enemy' end,
-    ['beastmaster'] = function() return '[fg]spawn [yellow]4[fg] small critters if the beastmaster gets hit' end,
+    ['beastmaster'] = function() return '[fg]spawns [yellow]3[fg] large critters on crit. gains [yellow]+10%[fg] crit chance' end,
     ['launcher'] = function() return '[fg]enemies launched take [yellow]300%[fg] more damage when they hit walls' end,
     ['jester'] = function() return '[fg]all knives seek enemies and pierce [yellow]2[fg] times' end,
     ['assassin'] = function() return '[fg]poison inflicted from crits deals [yellow]8x[fg] damage' end,
@@ -817,7 +943,7 @@ function init()
     ['fairy'] = function() return '[fg]creates [yellow]2[fg] healing orbs and grants [yellow]2[fg] units [yellow]+100%[fg] attack speed' end,
     ['priest'] = function() return '[fg]picks [yellow]4[fg] units at random and grants them a buff that prevents death once' end,
     ['infestor'] = function() return '[fg][yellow]triples[fg] the number of critters released and curse 2 more units' end,
-    ['flagellant'] = function() return '[yellow]4X[fg] flagellant max HP and grants [yellow]+12%[fg] damage to all allies per cast instead' end,
+    ['flagellant'] = function() return '[yellow]4X[fg] flagellant max HP and grants [yellow]+15%[fg] damage to all allies per cast instead' end,
     ['arcanist'] = function() return '[yellow]+50%[fg] attack speed for the orb and [yellow]2[fg] projectiles are released per cast' end,
     ['illusionist'] = function() return '[yellow]doubles[fg] the number of copies created and they release [yellow]12[fg] projectiles on death' end,
     ['artificer'] = function() return '[fg]automatons shoot and move 100% faster and release [yellow]12[fg] projectiles on death' end,
@@ -831,6 +957,21 @@ function init()
     ['usurer'] = function() return '[fg]if the same enemy is cursed [yellow]3[fg] times it takes [yellow]' .. 10*get_character_stat('usurer', 3, 'dmg') .. '[fg] damage' end,
     ['gambler'] = function() return '[yellow]60/40/20%[fg] chance to cast the attack [yellow]2/3/4[fg] times' end,
     ['thief'] = function() return '[fg]if the knife crits it deals [yellow]' .. 10*get_character_stat('thief', 3, 'dmg') .. '[fg] damage, chains [yellow]10[fg] times and grants [yellow]1[fg] gold' end,
+    ['sniper'] = function() return '[fg]bullets release an AoE that deals ' .. 0.25*get_character_stat('sniper', 3, 'dmg') .. ' damage upon crit' end,
+	['brawler'] = function() return '[fg]gives itself [yellow]+15%[fg] defense per active class' end,
+	['psybanker'] = function() return '[fg]increase the defense of allied mercenaries by [yellow]+10%[fg] for every mercenary' end,
+	['adventurer'] = function() return "[fg]increases the adventurer's stats by [yellow]50%[fg]" end,
+	['mortar'] = function() return '[fg]hellfire rings expand over time and deal [yellow]30%[fg] more damage' end,
+	['sylph'] = function() return '[fg]when affected enemies hit walls they create an area based on the knockback force' end,
+	['blood_elf'] = function() return "[fg]spawns two extra healing orbs" end,
+	['psylander'] = function() return "[fg]executes up to [yellow]6[fg] allied warriors, gaining buffs based on their classes" end,
+	['locust'] = function() return "[fg]locust critters have [yellow]+1[fg] health, aoe is [yellow]+25%[fg] bigger" end,
+	['boomerang'] = function() return "[fg]boomerangs automatically multicast [yellow]2[fg] times" end,
+	['rocketeer'] = function() return "[yellow]+100%[fg] area size" end,
+	['initiate'] = function() return "[fg]the initiate gains [yellow]+1%[fg] damage every attack" end,
+	['necromancer'] = function() return "[fg]spawns [yellow]1[fg] small critter when a unit takes damage. [yellow]1[fg] second cooldown per unit" end,
+	['acolyte'] = function() return '[fg]enemies killed by the altar fire off a dagger' end,
+	['shaman'] = function() return '[fg]gains [yellow]+5%[fg] to every stat whenever an allied unit dies' end
   }
 
   character_effect_descriptions_gray = {
@@ -864,7 +1005,7 @@ function init()
     ['cryomancer'] = function() return '[light_bg]enemies take 4x damage from the cryomancer' end,
     ['pyromancer'] = function() return '[light_bg]enemies killed by the pyromancer explode, dealing ' .. get_character_stat('pyromancer', 3, 'dmg') .. ' AoE damage' end,
     ['corruptor'] = function() return '[light_bg]spawn 2 small critters if the corruptor hits an enemy' end,
-    ['beastmaster'] = function() return '[light_bg]spawn 5 small critters if the beastmaster gets hit' end,
+    ['beastmaster'] = function() return '[light_bg]spawns 3 large critters on crit. gains +10% crit chance' end,
     ['launcher'] = function() return '[light_bg]enemies launched take 300% more damage when they hit walls' end,
     ['jester'] = function() return '[light_bg]curses 6 enemies and all knives seek enemies and pierce 2 times' end,
     ['assassin'] = function() return '[light_bg]poison inflicted from crits deals 8x damage' end,
@@ -891,6 +1032,21 @@ function init()
     ['usurer'] = function() return '[light_bg]if the same enemy is cursed 3 times it takes ' .. 10*get_character_stat('usurer', 3, 'dmg') .. ' damage' end,
     ['gambler'] = function() return '[light_bg]60/40/20% chance to cast the attack 2/3/4 times' end,
     ['thief'] = function() return '[light_bg]if the knife crits it deals ' .. 10*get_character_stat('thief', 3, 'dmg') .. ' damage, chains 10 times and grants 1 gold' end,
+    ['sniper'] = function() return '[light_bg]bullets release an AoE that deal ' .. 0.25*get_character_stat('sniper', 3, 'dmg') .. ' damage upon crit' end,
+	['brawler'] = function() return '[light_bg]gives itself +15% defense per active class' end,
+	['psybanker'] = function() return '[light_bg]increase the defense of allied mercenaries by +25% for every mercenary' end,
+	['adventurer'] = function() return "[light_bg]increases the adventurer's stats by 50%" end,
+	['mortar'] = function() return '[light_bg]hellfire rings expand over time and deal 30% more damage' end,
+	['sylph'] = function() return '[light_bg]when affected enemies hit walls they create an area based on the knockback force' end,
+	['blood_elf'] = function() return "[light_bg]spawns two extra healing orbs" end,
+	['psylander'] = function() return "[light_bg]???" end,
+	['locust'] = function() return "[light_bg]locust critters have +1 health, aoe is +25% bigger" end,
+	['boomerang'] = function() return "[light_bg]boomerangs automatically multicast 2 times" end,
+	['rocketeer'] = function() return "[light_bg]+100% area size" end,
+	['initiate'] = function() return "[light_bg]the initiate gains +1% damage every attack" end,
+	['necromancer'] = function() return "[light_bg]spawns 1 small critter when a unit takes damage. 1 second cooldown per unit" end,
+	['acolyte'] = function() return '[light_bg]enemies killed by the altar fire off a dagger' end,
+	['shaman'] = function() return '[light_bg]gains +5% to every stat whenever an allied unit dies' end
   }
 
   character_stats = {
@@ -951,6 +1107,21 @@ function init()
     ['usurer'] = function(lvl) return get_character_stat_string('usurer', lvl) end,
     ['gambler'] = function(lvl) return get_character_stat_string('gambler', lvl) end,
     ['thief'] = function(lvl) return get_character_stat_string('thief', lvl) end,
+    ['sniper'] = function(lvl) return get_character_stat_string('sniper', lvl) end,
+    ['brawler'] = function(lvl) return get_character_stat_string('brawler', lvl) end,
+    ['psybanker'] = function(lvl) return get_character_stat_string('brawler', lvl) end,
+    ['adventurer'] = function(lvl) return get_character_stat_string('adventurer', lvl) end,
+    ['mortar'] = function(lvl) return get_character_stat_string('mortar', lvl) end,
+    ['sylph'] = function(lvl) return get_character_stat_string('sylph', lvl) end,
+    ['blood_elf'] = function(lvl) return get_character_stat_string('blood_elf', lvl) end,
+    ['psylander'] = function(lvl) return get_character_stat_string('psylander', lvl) end,
+    ['locust'] = function(lvl) return get_character_stat_string('locust', lvl) end,
+    ['boomerang'] = function(lvl) return get_character_stat_string('boomerang', lvl) end,
+    ['rocketeer'] = function(lvl) return get_character_stat_string('rocketeer', lvl) end,
+    ['initiate'] = function(lvl) return get_character_stat_string('initiate', lvl) end,
+    ['necromancer'] = function(lvl) return get_character_stat_string('necromancer', lvl) end,
+    ['acolyte'] = function(lvl) return get_character_stat_string('acolyte', lvl) end,
+    ['shaman'] = function(lvl) return get_character_stat_string('shaman', lvl) end,
   }
 
   class_stat_multipliers = {
@@ -970,6 +1141,7 @@ function init()
     ['sorcerer'] = {hp = 1, dmg = 1, aspd = 1.5, area_dmg = 1.2, area_size = 1, def = 1, mvspd = 1},
     ['mercenary'] = {hp = 1, dmg = 1, aspd = 1, area_dmg = 1, area_size = 1, def = 1, mvspd = 1},
     ['explorer'] = {hp = 1, dmg = 1, aspd = 1, area_dmg = 1, area_size = 1, def = 1, mvspd = 1.25},
+    ['cultist'] = {hp = 1.1, dmg = 1.4, aspd = 1, area_dmg = 1, area_size = 1, def = 1, mvspd = 1},
     ['seeker'] = {hp = 0.5, dmg = 1, aspd = 1, area_dmg = 1, area_size = 1, def = 1, mvspd = 0.3},
     ['mini_boss'] = {hp = 1, dmg = 1, aspd = 1, area_dmg = 1, area_size = 1, def = 1, mvspd = 0.3},
     ['enemy_critter'] = {hp = 1, dmg = 1, aspd = 1, area_dmg = 1, area_size = 1, def = 1, mvspd = 0.5},
@@ -981,6 +1153,11 @@ function init()
     elseif lvl == 2 then return 'light_bg'
     elseif lvl == 1 then return 'yellow'
     else return 'light_bg' end
+  end
+  local rlb1 = function(lvl)
+    if lvl == 2 then return 'light_bg'
+    elseif lvl == 1 then return 'light_bg'
+    else return 'yellow' end
   end
   local ylb2 = function(lvl)
     if lvl == 3 then return 'light_bg'
@@ -1011,17 +1188,18 @@ function init()
     end,
     ['mercenary'] = function(lvl) return '[' .. ylb1(lvl) .. ']2[light_bg]/[' .. ylb2(lvl) .. ']4 [fg]- [' .. ylb1(lvl) .. ']+8%[light_bg]/[' .. ylb2(lvl) .. ']+16% [fg]chance for enemies to drop gold on death' end,
     ['explorer'] = function(lvl) return '[yellow]+15%[fg] attack speed and damage per active class to allied explorers' end,
+     ['cultist'] = function(lvl) return '[' .. ylb1(lvl) .. ']2[light_bg]/[' .. ylb2(lvl) .. ']4[light_bg]/[' .. ylb3(lvl) .. ']6 [fg]- ['..ylb1(lvl)..']+5%[light_bg]/['..ylb2(lvl)..']+10%[light_bg]/['..ylb3(lvl)..']+15%[fg] to all cultist stats per allied unit killed' end,
   }
 
   tier_to_characters = {
-    [1] = {'vagrant', 'swordsman', 'magician', 'archer', 'scout', 'cleric', 'arcanist', 'sentry', 'merchant'},
-    [2] = {'wizard', 'bomber', 'sage', 'squire', 'chronomancer', 'barbarian', 'cryomancer', 'host', 'beastmaster', 'jester', 'carver', 'psychic', 'witch', 'silencer', 'outlaw', 'miner'},
-    [3] = {'elementor', 'stormweaver', 'psykino', 'spellblade', 'psykeeper', 'engineer', 'plague_doctor', 'juggernaut', 'cannoneer', 'pyromancer', 'assassin', 'bane', 'barrager', 'infestor', 'flagellant', 'artificer', 'usurer'},
-    [4] = {'priest', 'highlander', 'fairy', 'blade', 'vulcanist', 'gambler', 'warden', 'corruptor', 'thief', 'dual_gunner'},
+    [1] = {'vagrant', 'swordsman', 'magician', 'archer', 'scout', 'cleric', 'arcanist', 'sentry', 'merchant','adventurer','brawler','initiate'},
+    [2] = {'wizard', 'bomber', 'sage', 'squire', 'chronomancer', 'barbarian', 'cryomancer', 'host', 'beastmaster', 'jester', 'carver', 'psychic', 'witch', 'silencer', 'outlaw', 'miner','sylph','launcher','boomerang','rocketeer','necromancer','acolyte'},
+    [3] = {'elementor', 'stormweaver', 'psykino', 'spellblade', 'psykeeper', 'engineer', 'plague_doctor', 'juggernaut', 'cannoneer', 'pyromancer', 'assassin', 'bane', 'barrager', 'infestor', 'flagellant', 'artificer', 'usurer','sniper','mortar','blood_elf','locust','shaman'},
+    [4] = {'priest', 'highlander', 'fairy', 'blade', 'vulcanist', 'gambler', 'warden', 'corruptor', 'thief', 'dual_gunner','psybanker','psylander'},
   }
 
-  non_attacking_characters = {'cleric', 'stormweaver', 'squire', 'chronomancer', 'sage', 'psykeeper', 'bane', 'carver', 'fairy', 'priest', 'flagellant', 'merchant', 'miner'}
-  non_cooldown_characters = {'squire', 'chronomancer', 'psykeeper', 'merchant', 'miner'}
+  non_attacking_characters = {'cleric', 'stormweaver', 'squire', 'chronomancer', 'sage', 'psykeeper', 'bane', 'carver', 'fairy', 'priest', 'flagellant', 'merchant', 'miner','psybanker'}
+  non_cooldown_characters = {'squire', 'chronomancer', 'psykeeper', 'merchant', 'miner','psybanker'}
 
   character_tiers = {
     ['vagrant'] = 1,
@@ -1081,6 +1259,21 @@ function init()
     ['usurer'] = 3,
     ['gambler'] = 4,
     ['thief'] = 4,
+    ['sniper'] = 3,
+	['brawler'] = 1,
+	['psybanker'] = 4,
+	['adventurer'] = 1,
+	['mortar'] = 3,
+	['sylph'] = 2,
+	['blood_elf'] = 3,
+	['psylander'] = 4,
+	['locust'] = 3,
+	['boomerang'] = 2,
+	['rocketeer'] = 2,
+	['initiate'] = 1,
+	['necromancer'] = 2,
+	['acolyte'] = 2,
+	['shaman'] = 3
   }
 
   launches_projectiles = function(character)
@@ -1106,6 +1299,7 @@ function init()
     local sorcerers = 0
     local mercenaries = 0
     local explorers = 0
+    local cultists = 0
     for _, unit in ipairs(units) do
       for _, unit_class in ipairs(character_classes[unit.character]) do
         if unit_class == 'ranger' then rangers = rangers + 1 end
@@ -1124,10 +1318,11 @@ function init()
         if unit_class == 'sorcerer' then sorcerers = sorcerers + 1 end
         if unit_class == 'mercenary' then mercenaries = mercenaries + 1 end
         if unit_class == 'explorer' then explorers = explorers + 1 end
+         if unit_class == 'cultist' then cultists = cultists + 1 end
       end
     end
     return {ranger = rangers, warrior = warriors, healer = healers, mage = mages, nuker = nukers, conjurer = conjurers, rogue = rogues,
-      enchanter = enchanters, psyker = psykers, curser = cursers, forcer = forcers, swarmer = swarmers, voider = voiders, sorcerer = sorcerers, mercenary = mercenaries, explorer = explorers}
+      enchanter = enchanters, psyker = psykers, curser = cursers, forcer = forcers, swarmer = swarmers, voider = voiders, sorcerer = sorcerers, mercenary = mercenaries, explorer = explorers, cultist = cultists}
   end
 
   get_class_levels = function(units)
@@ -1149,6 +1344,11 @@ function init()
       elseif class == 'explorer' then
         if number_of_units >= 1 then return 1
         else return 0 end
+         elseif class == 'cultist' then
+        if number_of_units >= 6 then return 3
+        elseif number_of_units >= 4 then return 2
+        elseif number_of_units >= 2 then return 1
+        else return 0 end
       end
     end
     return {
@@ -1168,6 +1368,7 @@ function init()
       sorcerer = units_to_class_level(units_per_class.sorcerer, 'sorcerer'),
       mercenary = units_to_class_level(units_per_class.mercenary, 'mercenary'),
       explorer = units_to_class_level(units_per_class.explorer, 'explorer'),
+       cultist = units_to_class_level(units_per_class.cultist, 'cultist'),
     }
   end
 
@@ -1196,6 +1397,7 @@ function init()
     ['sorcerer'] = function(units) return 2, 4, 6, get_number_of_units_per_class(units).sorcerer end,
     ['mercenary'] = function(units) return 2, 4, nil, get_number_of_units_per_class(units).mercenary end,
     ['explorer'] = function(units) return 1, 1, nil, get_number_of_units_per_class(units).explorer end,
+    ['cultist'] = function(units) return 2, 4, 6, get_number_of_units_per_class(units).cultist end,
   }
 
   passive_names = {
@@ -1283,6 +1485,9 @@ function init()
     ['psycholeak'] = 'Psycholeak',
     ['divine_blessing'] = 'Divine Blessing',
     ['hardening'] = 'Hardening',
+    ['critboost'] = 'Critical Boost',
+	['ritual'] = 'Ritual',
+	['sacrifice'] = 'Sacrifice'
   }
 
   passive_descriptions = {
@@ -1370,6 +1575,9 @@ function init()
     ['psycholeak'] = '[fg]position [yellow]1[fg] generates [yellow]1[fg] psyker orb every [yellow]8[fg] seconds',
     ['divine_blessing'] = '[fg]generate [yellow]1[fg] healing orb every [yellow]8[fg] seconds',
     ['hardening'] = '[yellow]+150%[fg] defense to all allies for [yellow]3[fg] seconds after an ally dies',
+    ['critboost'] = 'all rogues gain [yellow]+4/+8/+12%[fg] chance to crit',
+	['ritual'] = 'all cultists gain [yellow]+1%[fg] damage for each attack',
+	['sacrifice'] = 'whenever an unit dies, all cultists regain [yellow]+25/+50/+75%[fg] of their health'
   }
 
   local ts = function(lvl, a, b, c) return '[' .. ylb1(lvl) .. ']' .. tostring(a) .. '[light_bg]/[' .. ylb2(lvl) .. ']' .. tostring(b) .. '[light_bg]/[' .. ylb3(lvl) .. ']' .. tostring(c) .. '[fg]' end
@@ -1458,6 +1666,9 @@ function init()
     ['psycholeak'] = function(lvl) return '[fg]position [yellow]1[fg] generates [yellow]1[fg] psyker orb every [yellow]8[fg] seconds' end,
     ['divine_blessing'] = function(lvl) return '[fg]generate [yellow]1[fg] healing orb every [yellow]8[fg] seconds' end,
     ['hardening'] = function(lvl) return '[yellow]+150%[fg] defense to all allies for [yellow]3[fg] seconds after an ally dies' end,
+    ['critboost'] = function(lvl) return '[fg]all rogues gain ' .. ts(lvl, '+4', '+8', '12%') .. ' chance to crit' end,
+	['ritual'] = function(lvl) return  'all cultists gain [yellow]+1%[fg] damage for each attack' end,
+    ['sacrifice'] = function(lvl) return '[fg]whenever an unit dies, all cultists regain ' .. ts(lvl, '+25', '+50', '+75%') .. ' of their health' end,
   }
 
   level_to_tier_weights = {
@@ -1698,6 +1909,7 @@ function init()
     'speed_3', 'damage_4', 'shoot_5', 'death_6', 'lasting_7', 'kinetic_bomb', 'porcupine_technique', 'last_stand', 'annihilation', 
     'tremor', 'heavy_impact', 'fracture', 'meat_shield', 'divine_punishment', 'unleash', 'freezing_field', 'burning_field', 'gravity_field',
     'magnetism', 'insurance', 'dividends', 'haste', 'rearm', 'ceremonial_dagger', 'burning_strike', 'lucky_strike', 'healing_strike', 'psycholeak', 'divine_blessing', 'hardening',
+    'ritual', 'sacrifice'
   }
 
   steam.userStats.requestCurrentStats()
@@ -1911,7 +2123,7 @@ function open_options(self)
             'assassination', 'flying_daggers', 'ultimatum', 'magnify', 'echo_barrage', 'unleash', 'reinforce', 'payback', 'enchanted', 'freezing_field', 'burning_field', 'gravity_field', 'magnetism',
             'insurance', 'dividends', 'berserking', 'unwavering_stance', 'unrelenting_stance', 'blessing', 'haste', 'divine_barrage', 'orbitism', 'psyker_orbs', 'psychosink', 'rearm', 'taunt', 'construct_instability',
             'intimidation', 'vulnerability', 'temporal_chains', 'ceremonial_dagger', 'homing_barrage', 'critical_strike', 'noxious_strike', 'infesting_strike', 'burning_strike', 'lucky_strike', 'healing_strike', 'stunning_strike',
-            'silencing_strike', 'culling_strike', 'lightning_strike', 'psycholeak', 'divine_blessing', 'hardening', 'kinetic_strike',
+            'silencing_strike', 'culling_strike', 'lightning_strike', 'psycholeak', 'divine_blessing', 'hardening', 'kinetic_strike', 'critboost', 'ritual'
           }
           max_units = math.clamp(7 + current_new_game_plus, 7, 12)
           main:add(BuyScreen'buy_screen')
@@ -2065,7 +2277,7 @@ function open_options(self)
         ui_switch1:play{pitch = random:float(0.95, 1.05), volume = 0.5}
         b.spring:pull(0.2, 200, 10)
         b.selected = true
-        current_new_game_plus = math.clamp(current_new_game_plus - 1, 0, 5)
+        current_new_game_plus = math.clamp(current_new_game_plus - 1, 0, 10)
         state.current_new_game_plus = current_new_game_plus
         self.ng_t.text:set_text({{text = '[bg10]current: ' .. current_new_game_plus, font = pixul_font, alignment = 'center'}})
         max_units = 7 + current_new_game_plus
